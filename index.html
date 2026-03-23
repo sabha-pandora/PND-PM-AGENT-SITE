@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pandora Product Manager Agent</title>
+    <style>
+        :root {
+            --pandora-pink: #FF93A0;
+            --pandora-pink-light: #FFB3BC;
+            --pandora-pink-dark: #E8707E;
+            --pandora-pink-glow: rgba(255, 147, 160, 0.18);
+            --pandora-pink-subtle: rgba(255, 147, 160, 0.06);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8F6F7;
+            --bg-card: #FFFFFF;
+            --bg-code: #F4F0F2;
+            --text-primary: #1A1A1A;
+            --text-secondary: #555555;
+            --text-muted: #888888;
+            --border: #E8E0E4;
+            --border-light: #F0EAED;
+            --shadow: rgba(0, 0, 0, 0.06);
+            --shadow-hover: rgba(255, 147, 160, 0.1);
+            --toggle-bg: #F0EAED;
+            --toggle-knob: #FFFFFF;
+            --logo-filter: none;
+            --badge-bg: rgba(255, 147, 160, 0.08);
+            --badge-text: var(--pandora-pink);
+            --table-header-bg: #FFF0F2;
+            --table-stripe: #FFFAFB;
+            --arch-line: #E8E0E4;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0F0A0D;
+            --bg-secondary: #1A1217;
+            --bg-card: #1E1620;
+            --bg-code: #241C28;
+            --text-primary: #F5F0F3;
+            --text-secondary: #B8A8B0;
+            --text-muted: #7A6B73;
+            --border: #2E2432;
+            --border-light: #241C28;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --shadow-hover: rgba(255, 147, 160, 0.2);
+            --toggle-bg: #2E2432;
+            --toggle-knob: var(--pandora-pink);
+            --logo-filter: brightness(0) invert(1);
+            --badge-bg: rgba(255, 147, 160, 0.15);
+            --badge-text: var(--pandora-pink-light);
+            --table-header-bg: rgba(255, 147, 160, 0.08);
+            --table-stripe: rgba(255, 147, 160, 0.03);
+            --arch-line: #2E2432;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        /* ========== Theme Toggle ========== */
+        .theme-toggle {
+            position: fixed;
+            top: 24px;
+            right: 28px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .theme-toggle-label {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .toggle-track {
+            width: 52px;
+            height: 28px;
+            background: var(--toggle-bg);
+            border-radius: 14px;
+            position: relative;
+            transition: background 0.3s ease;
+            border: 1px solid var(--border);
+        }
+
+        .toggle-track::before {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            background: var(--toggle-knob);
+            transition: transform 0.3s ease, background 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+        }
+
+        [data-theme="dark"] .toggle-track::before {
+            transform: translateX(24px);
+        }
+
+        .toggle-icon {
+            font-size: 16px;
+        }
+
+        /* ========== Header ========== */
+        .header {
+            text-align: center;
+            padding: 80px 24px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--pandora-pink-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .header-logo {
+            width: 220px;
+            margin-bottom: 40px;
+            filter: var(--logo-filter);
+            transition: filter 0.3s ease;
+        }
+
+        .header-divider {
+            width: 60px;
+            height: 3px;
+            background: var(--pandora-pink);
+            margin: 0 auto 32px;
+            border-radius: 2px;
+        }
+
+        .header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .header h1 span {
+            color: var(--pandora-pink);
+        }
+
+        .header-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+
+        .header-badges {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: var(--badge-bg);
+            color: var(--badge-text);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .badge-icon {
+            font-size: 14px;
+        }
+
+        /* ========== Navigation ========== */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: background 0.3s ease;
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .nav-inner::-webkit-scrollbar { display: none; }
+
+        .nav-link {
+            padding: 16px 24px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            text-decoration: none;
+            white-space: nowrap;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--pandora-pink);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 24px;
+            right: 24px;
+            height: 2px;
+            background: var(--pandora-pink);
+            border-radius: 1px;
+        }
+
+        /* ========== Sections ========== */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        section + section {
+            border-top: 1px solid var(--border-light);
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--pandora-pink);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .section-desc {
+            font-size: 17px;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin-bottom: 48px;
+            line-height: 1.7;
+        }
+
+        /* ========== Features Grid ========== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--pandora-pink);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--pandora-pink-light);
+            box-shadow: 0 8px 32px var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--pandora-pink-glow);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 18px;
+            font-weight: 650;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        .feature-tag {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--pandora-pink);
+            background: var(--badge-bg);
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin-top: 14px;
+        }
+
+        /* ========== Commands Table ========== */
+        .commands-table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .commands-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .commands-table thead {
+            background: var(--table-header-bg);
+        }
+
+        .commands-table th {
+            padding: 14px 20px;
+            text-align: left;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--pandora-pink);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .commands-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-light);
+            vertical-align: top;
+        }
+
+        .commands-table tbody tr:nth-child(even) {
+            background: var(--table-stripe);
+        }
+
+        .commands-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .commands-table tbody tr {
+            transition: background 0.15s ease;
+        }
+
+        .commands-table tbody tr:hover {
+            background: var(--pandora-pink-subtle);
+        }
+
+        .cmd-name {
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--pandora-pink);
+            background: var(--badge-bg);
+            padding: 3px 10px;
+            border-radius: 5px;
+            white-space: nowrap;
+        }
+
+        .cmd-desc {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .cmd-detail {
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-top: 4px;
+            line-height: 1.5;
+        }
+
+        .cmd-category {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 3px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .cat-write { background: rgba(255, 147, 160, 0.1); color: var(--pandora-pink-light); }
+        .cat-review { background: rgba(59, 130, 246, 0.1); color: #60A5FA; }
+        .cat-docs { background: rgba(34, 197, 94, 0.1); color: #4ADE80; }
+        .cat-ops { background: rgba(245, 158, 11, 0.1); color: #FBBF24; }
+        .cat-design { background: rgba(168, 85, 247, 0.1); color: #C084FC; }
+
+        /* ========== Architecture ========== */
+        .arch-diagram {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 48px 40px;
+            margin-bottom: 40px;
+            overflow-x: auto;
+        }
+
+        .arch-tree {
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 13px;
+            line-height: 1.9;
+            color: var(--text-secondary);
+        }
+
+        .arch-tree .folder {
+            color: var(--pandora-pink);
+            font-weight: 600;
+        }
+
+        .arch-tree .file {
+            color: var(--text-primary);
+        }
+
+        .arch-tree .comment {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .arch-layers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .arch-layer {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            text-align: center;
+            position: relative;
+        }
+
+        .arch-layer-num {
+            width: 32px;
+            height: 32px;
+            background: var(--pandora-pink);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            margin: 0 auto 14px;
+        }
+
+        .arch-layer h4 {
+            font-size: 15px;
+            font-weight: 650;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .arch-layer p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ========== API Flow ========== */
+        .api-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            flex-wrap: wrap;
+            margin: 40px 0;
+            padding: 32px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .api-node {
+            text-align: center;
+            padding: 16px 24px;
+        }
+
+        .api-node-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--pandora-pink-glow);
+            border: 2px solid var(--pandora-pink);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 0 auto 10px;
+        }
+
+        .api-node-label {
+            font-size: 12px;
+            font-weight: 650;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-primary);
+        }
+
+        .api-node-sub {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .api-arrow {
+            font-size: 24px;
+            color: var(--pandora-pink);
+            padding: 0 8px;
+        }
+
+        /* ========== Benefits ========== */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .benefit-card {
+            display: flex;
+            gap: 20px;
+            padding: 28px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.25s ease;
+        }
+
+        .benefit-card:hover {
+            border-color: var(--pandora-pink-light);
+            box-shadow: 0 8px 24px var(--shadow-hover);
+        }
+
+        .benefit-num {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            background: linear-gradient(135deg, var(--pandora-pink), var(--pandora-pink-light));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .benefit-card h3 {
+            font-size: 16px;
+            font-weight: 650;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+        }
+
+        .benefit-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ========== Stats Bar ========== */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 28px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--pandora-pink);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+        }
+
+        /* ========== Best Practices ========== */
+        .practices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 32px;
+        }
+
+        .practice-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .practice-card h4 {
+            font-size: 14px;
+            font-weight: 650;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .practice-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .practice-list li {
+            font-size: 13px;
+            color: var(--text-secondary);
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .practice-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 13px;
+            width: 6px;
+            height: 6px;
+            background: var(--pandora-pink);
+            border-radius: 50%;
+        }
+
+        /* ========== Footer ========== */
+        .footer {
+            padding: 48px 24px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            background: var(--bg-secondary);
+        }
+
+        .footer-logo {
+            width: 120px;
+            filter: var(--logo-filter);
+            margin-bottom: 16px;
+            opacity: 0.6;
+            transition: filter 0.3s ease;
+        }
+
+        .footer p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .footer-link {
+            color: var(--pandora-pink);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* ========== Responsive ========== */
+        @media (max-width: 768px) {
+            .header { padding: 60px 20px 48px; }
+            .header h1 { font-size: 32px; }
+            .header-subtitle { font-size: 17px; }
+            .section-title { font-size: 28px; }
+            .stats-bar { grid-template-columns: repeat(2, 1fr); }
+            .nav-link { padding: 14px 16px; font-size: 12px; }
+            .theme-toggle { top: 16px; right: 16px; }
+            .theme-toggle-label { display: none; }
+            .api-flow { flex-direction: column; }
+            .api-arrow { transform: rotate(90deg); }
+            .arch-diagram { padding: 24px 20px; }
+        }
+
+        @media (max-width: 480px) {
+            .features-grid { grid-template-columns: 1fr; }
+            .benefits-grid { grid-template-columns: 1fr; }
+            .stats-bar { grid-template-columns: 1fr 1fr; gap: 12px; }
+        }
+
+        /* ========== Scroll animations ========== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <span class="theme-toggle-label" id="themeLabel">Dark</span>
+        <div class="toggle-track"></div>
+        <span class="toggle-icon" id="themeIcon">&#9790;</span>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <img src="assets/pandora_logo_102224_rgb.webp" alt="Pandora" class="header-logo">
+        <div class="header-divider"></div>
+        <h1>Product Manager <span>Agent</span></h1>
+        <p class="header-subtitle">AI-powered product management for Pandora Digital teams. Write stories, resolve queries, create docs &mdash; all following best practices. Supports PVA, CARE, LOYALTY and more.</p>
+        <div class="header-badges">
+            <span class="badge"><span class="badge-icon">&#9881;</span> 10 Slash Commands</span>
+            <span class="badge"><span class="badge-icon">&#9889;</span> Jira REST API</span>
+            <span class="badge"><span class="badge-icon">&#128196;</span> Confluence</span>
+            <span class="badge"><span class="badge-icon">&#127912;</span> Figma Integration</span>
+            <span class="badge"><span class="badge-icon">&#128101;</span> Multi-Team</span>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="#features" class="nav-link active">Features</a>
+            <a href="#commands" class="nav-link">Commands</a>
+            <a href="#architecture" class="nav-link">Architecture</a>
+            <a href="#standards" class="nav-link">Standards</a>
+            <a href="#benefits" class="nav-link">Benefits</a>
+        </div>
+    </nav>
+
+    <!-- Stats Bar -->
+    <div class="container">
+        <section style="padding-bottom: 0; border: none;">
+            <div class="stats-bar fade-in">
+                <div class="stat-item">
+                    <div class="stat-value">10</div>
+                    <div class="stat-label">Slash Commands</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">3+</div>
+                    <div class="stat-label">Teams Supported</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">Quality Frameworks</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">1</div>
+                    <div class="stat-label">.env to Switch Teams</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Features -->
+    <div class="container">
+        <section id="features">
+            <span class="section-label">Capabilities</span>
+            <h2 class="section-title">What the PM Agent Does</h2>
+            <p class="section-desc">An AI-powered product management assistant that integrates directly with any Pandora team's Jira board and Confluence workspace via REST API. Switch teams by changing one env variable.</p>
+
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">&#9997;</div>
+                    <h3>Write User Stories</h3>
+                    <p>Create new Jira stories from natural language descriptions. Automatically follows "As a / I want / So that" format, INVEST criteria, and links to the correct parent epic.</p>
+                    <span class="feature-tag">Jira REST API</span>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">&#10003;</div>
+                    <h3>Testable Acceptance Criteria</h3>
+                    <p>Generates acceptance criteria in Given/When/Then (Gherkin BDD) format. Every story gets minimum 3 scenarios: happy path, edge case, and negative path.</p>
+                    <span class="feature-tag">Gherkin BDD</span>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">&#128172;</div>
+                    <h3>Resolve Team Queries</h3>
+                    <p>Reads Jira comments from developers, UX designers, and QE. Provides contextual answers by cross-referencing ACs, related stories, and Figma designs.</p>
+                    <span class="feature-tag">Auto-Response</span>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">&#128203;</div>
+                    <h3>Confluence Documentation</h3>
+                    <p>Creates epic summaries, feature specs, sprint overviews, and release notes directly in Confluence with structured templates.</p>
+                    <span class="feature-tag">Confluence API</span>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">&#128269;</div>
+                    <h3>Story Quality Audits</h3>
+                    <p>Runs quality audits across epics or sprints. Detects anti-patterns: vague ACs, compound criteria, missing negative paths, solutions-in-disguise.</p>
+                    <span class="feature-tag">Quality Gate</span>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">&#127912;</div>
+                    <h3>Figma-to-Stories</h3>
+                    <p>Reviews Figma designs and generates user stories or acceptance criteria based on visible interactions, states, and flows in the design.</p>
+                    <span class="feature-tag">Figma MCP</span>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">&#128736;</div>
+                    <h3>Epic Decomposition</h3>
+                    <p>Breaks epics into sprint-ready stories using SPIDR methodology &mdash; Spike, Paths, Interfaces, Data, Rules. Identifies gaps in coverage.</p>
+                    <span class="feature-tag">SPIDR</span>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">&#128260;</div>
+                    <h3>Knowledge Base Sync</h3>
+                    <p>Maintains a local cache of the entire Jira board state. Syncs epics, stories, metrics, and gaps on demand for fast offline analysis.</p>
+                    <span class="feature-tag">Live Sync</span>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">&#128202;</div>
+                    <h3>Traceability Matrix</h3>
+                    <p>Generates a full traceability matrix as both markdown and an interactive HTML dashboard with charts, search, filtering, and gap analysis across all epics and stories.</p>
+                    <span class="feature-tag">Dashboard</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Commands -->
+    <div class="container">
+        <section id="commands">
+            <span class="section-label">Slash Commands</span>
+            <h2 class="section-title">Skills &amp; Commands</h2>
+            <p class="section-desc">Ten purpose-built commands that cover the full PM lifecycle &mdash; from story creation to quality audits.</p>
+
+            <div class="commands-table-wrap fade-in">
+                <table class="commands-table">
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="cmd-name">/write-story</span></td>
+                            <td>
+                                <div class="cmd-desc">Create a new Jira user story</div>
+                                <div class="cmd-detail">Parses natural language, finds the right epic, checks for duplicates, drafts with INVEST compliance and Gherkin ACs, creates via Jira REST API.</div>
+                            </td>
+                            <td><span class="cmd-category cat-write">Write</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="cmd-name">/improve-story</span></td>
+                            <td>
+                                <div class="cmd-desc">Improve an existing story</div>
+                                <div class="cmd-detail">Evaluates against INVEST criteria, rewrites summary/description/ACs to meet best practices, shows before/after diff.</div>
+                            </td>
+                            <td><span class="cmd-category cat-review">Review</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="cmd-name">/write-ac</span></td>
+                            <td>
+                                <div class="cmd-desc">Write acceptance criteria in Gherkin BDD</div>
+                                <div class="cmd-detail">Generates Given/When/Then scenarios: happy path, edge cases, negative paths. Checks Figma designs for UI context. Min 3 scenarios per story.</div>
+                            </td>
+                            <td><span class="cmd-category cat-write">Write</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="cmd-name">/resolve-query</span></td>
+                            <td>
+                                <div class="cmd-desc">Answer team queries from Jira comments</div>
+                                <div class="cmd-detail">Reads dev/UX/QE comments, gathers context from ACs and related stories, posts structured response prefixed with [PM Agent].</div>
+                            </td>
+                            <td><span class="cmd-category cat-review">Review</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="cmd-name">/create-doc</span></td>
+                            <td>
+                                <div class="cmd-desc">Create Confluence documentation</div>
+                                <div class="cmd-detail">Generates epic summaries, feature specs, sprint overviews, or release notes. Creates directly in Confluence via REST API.</div>
+                            </td>
+                            <td><span class="cmd-category cat-docs">Docs</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="cmd-name">/decompose-epic</span></td>
+                            <td>
+                                <div class="cmd-desc">Break epic into stories via SPIDR</div>
+                                <div class="cmd-detail">Analyzes existing coverage, applies Spike/Paths/Interfaces/Data/Rules decomposition, proposes new stories with priority order.</div>
+                            </td>
+                            <td><span class="cmd-category cat-write">Write</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="cmd-name">/sync-kb</span></td>
+                            <td>
+                                <div class="cmd-desc">Sync knowledge base from Jira</div>
+                                <div class="cmd-detail">Fetches all epics and stories, rebuilds local JSON/MD knowledge base, reports changes since last sync.</div>
+                            </td>
+                            <td><span class="cmd-category cat-ops">Ops</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="cmd-name">/audit-stories</span></td>
+                            <td>
+                                <div class="cmd-desc">Quality audit on stories</div>
+                                <div class="cmd-detail">Checks format, INVEST compliance, AC quality, anti-patterns. Generates severity-ranked report with fix recommendations.</div>
+                            </td>
+                            <td><span class="cmd-category cat-review">Review</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="cmd-name">/review-figma</span></td>
+                            <td>
+                                <div class="cmd-desc">Generate stories from Figma designs</div>
+                                <div class="cmd-detail">Analyzes design interactions, states, and flows. Creates stories or updates ACs based on visual specifications.</div>
+                            </td>
+                            <td><span class="cmd-category cat-design">Design</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="cmd-name">/generate-traceability</span></td>
+                            <td>
+                                <div class="cmd-desc">Generate traceability matrix</div>
+                                <div class="cmd-detail">Fetches all epics and stories from Jira, computes coverage metrics, generates traceability.md and an interactive HTML dashboard with charts, search, filtering, and gap analysis.</div>
+                            </td>
+                            <td><span class="cmd-category cat-ops">Ops</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <!-- Architecture -->
+    <div class="container">
+        <section id="architecture">
+            <span class="section-label">System Design</span>
+            <h2 class="section-title">Architecture</h2>
+            <p class="section-desc">A Claude Code agent with structured commands, persistent memory, multi-team support, and direct Jira REST API integration.</p>
+
+            <!-- API Flow -->
+            <div class="api-flow fade-in">
+                <div class="api-node">
+                    <div class="api-node-icon">&#128100;</div>
+                    <div class="api-node-label">User</div>
+                    <div class="api-node-sub">Slash Command</div>
+                </div>
+                <div class="api-arrow">&#10132;</div>
+                <div class="api-node">
+                    <div class="api-node-icon">&#129302;</div>
+                    <div class="api-node-label">PM Agent</div>
+                    <div class="api-node-sub">Claude Code</div>
+                </div>
+                <div class="api-arrow">&#10132;</div>
+                <div class="api-node">
+                    <div class="api-node-icon">&#128272;</div>
+                    <div class="api-node-label">Jira API</div>
+                    <div class="api-node-sub">REST v3 + API Key</div>
+                </div>
+                <div class="api-arrow">&#10132;</div>
+                <div class="api-node">
+                    <div class="api-node-icon">&#128203;</div>
+                    <div class="api-node-label">Confluence</div>
+                    <div class="api-node-sub">REST API v2</div>
+                </div>
+            </div>
+
+            <!-- File Structure -->
+            <div class="arch-diagram fade-in">
+                <pre class="arch-tree"><span class="folder">PANDORA-PM-AGENT/</span>
+<span class="file">  CLAUDE.md</span>                         <span class="comment"># Agent brain &mdash; standards, rules, multi-team config</span>
+<span class="file">  .env</span>                              <span class="comment"># Team config + Jira API credentials (gitignored)</span>
+<span class="file">  .env.example</span>                      <span class="comment"># Template for setup</span>
+<span class="file">  index.html</span>                        <span class="comment"># This page &mdash; agent documentation</span>
+
+<span class="folder">  docs/</span>
+<span class="folder">    shared/</span>                         <span class="comment"># Standards shared across all teams</span>
+<span class="file">      user-stories-best-practices.docx</span>
+<span class="folder">    pva/</span>                            <span class="comment"># PVA team knowledge base</span>
+<span class="file">      knowledge_base.json</span>           <span class="comment"># Structured board state</span>
+<span class="file">      knowledge_base.md</span>             <span class="comment"># Human-readable board state</span>
+<span class="file">      traceability.md</span>               <span class="comment"># Traceability matrix</span>
+<span class="file">      pva_traceability.html</span>         <span class="comment"># Interactive dashboard</span>
+<span class="folder">    care/</span>                           <span class="comment"># CARE team knowledge base</span>
+<span class="folder">    loyalty/</span>                        <span class="comment"># LOYALTY team knowledge base</span>
+
+<span class="folder">  .claude/</span>
+<span class="folder">    commands/</span>                       <span class="comment"># 10 slash commands (team-agnostic)</span>
+<span class="file">      write-story.md</span>               <span class="comment"># /write-story</span>
+<span class="file">      improve-story.md</span>             <span class="comment"># /improve-story</span>
+<span class="file">      write-ac.md</span>                  <span class="comment"># /write-ac</span>
+<span class="file">      resolve-query.md</span>             <span class="comment"># /resolve-query</span>
+<span class="file">      create-doc.md</span>                <span class="comment"># /create-doc</span>
+<span class="file">      decompose-epic.md</span>            <span class="comment"># /decompose-epic</span>
+<span class="file">      sync-kb.md</span>                   <span class="comment"># /sync-kb</span>
+<span class="file">      audit-stories.md</span>             <span class="comment"># /audit-stories</span>
+<span class="file">      review-figma.md</span>              <span class="comment"># /review-figma</span>
+<span class="file">      generate-traceability.md</span>     <span class="comment"># /generate-traceability</span>
+
+<span class="folder">    memories/</span>                       <span class="comment"># Persistent agent memory</span>
+<span class="file">      project-context.md</span>            <span class="comment"># Multi-team config, workflows</span>
+<span class="file">      jira-conventions.md</span>           <span class="comment"># Naming patterns, labels</span>
+<span class="file">      decision-log.md</span>              <span class="comment"># Cross-team decision history</span>
+
+<span class="file">    settings.json</span>                   <span class="comment"># Permissions &amp; environment</span></pre>
+            </div>
+
+            <!-- Architecture Layers -->
+            <div class="arch-layers">
+                <div class="arch-layer fade-in">
+                    <div class="arch-layer-num">1</div>
+                    <h4>Instruction Layer</h4>
+                    <p>CLAUDE.md defines agent identity, user story standards, AC format, SPIDR rules, multi-team config, and API patterns.</p>
+                </div>
+                <div class="arch-layer fade-in">
+                    <div class="arch-layer-num">2</div>
+                    <h4>Command Layer</h4>
+                    <p>10 slash commands in <code>.claude/commands/</code> with step-by-step workflows for each PM task.</p>
+                </div>
+                <div class="arch-layer fade-in">
+                    <div class="arch-layer-num">3</div>
+                    <h4>Memory Layer</h4>
+                    <p>Persistent context in <code>.claude/memories/</code> stores project config, conventions, and decision history.</p>
+                </div>
+                <div class="arch-layer fade-in">
+                    <div class="arch-layer-num">4</div>
+                    <h4>Integration Layer</h4>
+                    <p>Jira REST API v3 with API key auth. Confluence API for docs. Figma MCP for designs. Team-specific KB in <code>docs/{team}/</code>.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Standards -->
+    <div class="container">
+        <section id="standards">
+            <span class="section-label">Quality Framework</span>
+            <h2 class="section-title">Built-in Best Practices</h2>
+            <p class="section-desc">Every action the agent takes is guided by Pandora Digital's quality engineering standards.</p>
+
+            <div class="practices-grid">
+                <div class="practice-card fade-in">
+                    <h4>&#9745; INVEST Criteria</h4>
+                    <ul class="practice-list">
+                        <li><strong>I</strong>ndependent &mdash; self-contained, no hidden dependencies</li>
+                        <li><strong>N</strong>egotiable &mdash; describes what, not how</li>
+                        <li><strong>V</strong>aluable &mdash; delivers clear user/business value</li>
+                        <li><strong>E</strong>stimable &mdash; enough detail to size</li>
+                        <li><strong>S</strong>mall &mdash; fits in one sprint (1-3 days)</li>
+                        <li><strong>T</strong>estable &mdash; clear pass/fail acceptance criteria</li>
+                    </ul>
+                </div>
+                <div class="practice-card fade-in">
+                    <h4>&#9745; Gherkin BDD Format</h4>
+                    <ul class="practice-list">
+                        <li><strong>Given</strong> a precondition or context</li>
+                        <li><strong>When</strong> an action is performed</li>
+                        <li><strong>Then</strong> the expected outcome occurs</li>
+                        <li>Minimum 3 scenarios per story</li>
+                        <li>Happy path + edge case + negative path</li>
+                        <li>Atomic: one behavior per scenario</li>
+                    </ul>
+                </div>
+                <div class="practice-card fade-in">
+                    <h4>&#9745; SPIDR Decomposition</h4>
+                    <ul class="practice-list">
+                        <li><strong>S</strong>pike &mdash; research unknowns first</li>
+                        <li><strong>P</strong>aths &mdash; split by user workflows</li>
+                        <li><strong>I</strong>nterfaces &mdash; split by channels</li>
+                        <li><strong>D</strong>ata &mdash; split by variations</li>
+                        <li><strong>R</strong>ules &mdash; split by business rules</li>
+                    </ul>
+                </div>
+                <div class="practice-card fade-in">
+                    <h4>&#9745; Anti-Pattern Detection</h4>
+                    <ul class="practice-list">
+                        <li>Rejects vague language ("works correctly")</li>
+                        <li>Catches solutions-in-disguise</li>
+                        <li>Flags missing negative/error paths</li>
+                        <li>Splits compound criteria automatically</li>
+                        <li>Identifies assumed context</li>
+                    </ul>
+                </div>
+                <div class="practice-card fade-in">
+                    <h4>&#9745; Definition of Ready</h4>
+                    <ul class="practice-list">
+                        <li>As a / I want / So that format</li>
+                        <li>ACs reviewed by QE</li>
+                        <li>Sized and estimated by dev team</li>
+                        <li>Dependencies documented</li>
+                        <li>Mockups &amp; API contracts attached</li>
+                        <li>Linked to parent Epic</li>
+                    </ul>
+                </div>
+                <div class="practice-card fade-in">
+                    <h4>&#9745; Definition of Done</h4>
+                    <ul class="practice-list">
+                        <li>All ACs met and signed off by PO</li>
+                        <li>Unit tests passing (min 80% coverage)</li>
+                        <li>Functional tests executed &amp; linked</li>
+                        <li>No open Critical/High defects</li>
+                        <li>Code peer reviewed &amp; merged</li>
+                        <li>Docs and release notes updated</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Benefits -->
+    <div class="container">
+        <section id="benefits">
+            <span class="section-label">Impact</span>
+            <h2 class="section-title">Benefits</h2>
+            <p class="section-desc">How the PM Agent transforms product management workflow for the PVA team.</p>
+
+            <div class="benefits-grid">
+                <div class="benefit-card fade-in">
+                    <div class="benefit-num">1</div>
+                    <div>
+                        <h3>Consistent Story Quality</h3>
+                        <p>Every story follows the same format, passes INVEST criteria, and includes Gherkin BDD acceptance criteria &mdash; eliminating quality variance across PMs.</p>
+                    </div>
+                </div>
+                <div class="benefit-card fade-in">
+                    <div class="benefit-num">2</div>
+                    <div>
+                        <h3>Faster QE Handoff</h3>
+                        <p>Given/When/Then ACs translate directly into test cases. QE can write automated tests from day one without ambiguity or back-and-forth.</p>
+                    </div>
+                </div>
+                <div class="benefit-card fade-in">
+                    <div class="benefit-num">3</div>
+                    <div>
+                        <h3>Reduced Grooming Time</h3>
+                        <p>Stories arrive at grooming pre-checked against Definition of Ready. Teams spend time discussing value, not fixing formatting.</p>
+                    </div>
+                </div>
+                <div class="benefit-card fade-in">
+                    <div class="benefit-num">4</div>
+                    <div>
+                        <h3>Instant Query Resolution</h3>
+                        <p>Dev/UX/QE questions get contextual answers within minutes, not days. The agent cross-references ACs, related stories, and Figma designs automatically.</p>
+                    </div>
+                </div>
+                <div class="benefit-card fade-in">
+                    <div class="benefit-num">5</div>
+                    <div>
+                        <h3>Zero Scope Creep</h3>
+                        <p>Clear ACs define exactly what's in and out of scope. Anti-pattern detection catches gold-plating and compound criteria before they enter a sprint.</p>
+                    </div>
+                </div>
+                <div class="benefit-card fade-in">
+                    <div class="benefit-num">6</div>
+                    <div>
+                        <h3>Living Documentation</h3>
+                        <p>Confluence docs are generated directly from Jira data &mdash; always current, always structured, never manually copy-pasted.</p>
+                    </div>
+                </div>
+                <div class="benefit-card fade-in">
+                    <div class="benefit-num">7</div>
+                    <div>
+                        <h3>Design-to-Story Pipeline</h3>
+                        <p>Figma designs are automatically translated into stories and ACs, ensuring nothing gets lost between design handoff and implementation.</p>
+                    </div>
+                </div>
+                <div class="benefit-card fade-in">
+                    <div class="benefit-num">8</div>
+                    <div>
+                        <h3>Board-Wide Visibility</h3>
+                        <p>Quality audits and knowledge base sync give real-time visibility into AC coverage, test gaps, and story quality across all 40 epics.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <img src="assets/pandora_logo_102224_rgb.webp" alt="Pandora" class="footer-logo">
+        <p>Pandora Product Manager Agent &mdash; Built with <a href="https://claude.ai" class="footer-link">Claude Code</a> for Pandora Digital</p>
+        <p style="margin-top: 6px;">Jira REST API v3 &bull; Confluence API v2 &bull; Figma Integration</p>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('pva-theme', next);
+            updateThemeUI(next);
+        }
+
+        function updateThemeUI(theme) {
+            document.getElementById('themeLabel').textContent = theme === 'light' ? 'Dark' : 'Light';
+            document.getElementById('themeIcon').innerHTML = theme === 'light' ? '&#9790;' : '&#9728;';
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('pva-theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateThemeUI(savedTheme);
+
+        // Scroll-based navigation highlight
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const top = section.offsetTop - 100;
+                if (window.scrollY >= top) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Fade-in on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
