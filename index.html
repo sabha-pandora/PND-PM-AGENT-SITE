@@ -766,6 +766,186 @@
             .stats-bar { grid-template-columns: 1fr 1fr; gap: 12px; }
         }
 
+        /* ========== Get Started ========== */
+        .steps-list {
+            counter-reset: step-counter;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .step {
+            display: grid;
+            grid-template-columns: 56px 1fr;
+            gap: 0 24px;
+            position: relative;
+        }
+
+        .step-num {
+            width: 56px;
+            min-width: 56px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        .step-num-circle {
+            width: 56px;
+            height: 56px;
+            min-width: 56px;
+            background: var(--pandora-pink-glow);
+            border: 2px solid var(--pandora-pink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--pandora-pink);
+            flex-shrink: 0;
+            z-index: 1;
+        }
+
+        .step:not(:last-child) .step-num::after {
+            content: '';
+            flex: 1;
+            width: 2px;
+            background: var(--border);
+            margin-top: 4px;
+        }
+
+        .step-body {
+            padding: 12px 0 48px;
+            min-width: 0;
+        }
+
+        .step-body h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .step-body .step-sub {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .step-body p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .code-block {
+            background: var(--bg-code);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px 20px;
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 13px;
+            line-height: 1.8;
+            color: var(--text-primary);
+            overflow-x: auto;
+            margin-bottom: 16px;
+            white-space: pre;
+        }
+
+        .code-block .code-comment {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .code-block .code-key {
+            color: var(--pandora-pink);
+            font-weight: 600;
+        }
+
+        .code-block .code-value {
+            color: #4ADE80;
+        }
+
+        .tip-box {
+            display: flex;
+            gap: 12px;
+            padding: 14px 18px;
+            background: rgba(255, 147, 160, 0.07);
+            border: 1px solid rgba(255, 147, 160, 0.25);
+            border-radius: 10px;
+            margin-bottom: 16px;
+        }
+
+        .tip-icon {
+            font-size: 18px;
+            line-height: 1.5;
+            flex-shrink: 0;
+        }
+
+        .tip-box p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .tip-box strong {
+            color: var(--pandora-pink);
+        }
+
+        .inline-cmd {
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--pandora-pink);
+            background: var(--badge-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 16px;
+        }
+
+        .checklist li {
+            font-size: 14px;
+            color: var(--text-secondary);
+            padding: 5px 0 5px 28px;
+            position: relative;
+            line-height: 1.55;
+        }
+
+        .checklist li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--pandora-pink);
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .step-tag {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin-bottom: 14px;
+        }
+
+        .tag-setup   { background: rgba(59,130,246,0.1);  color: #60A5FA; }
+        .tag-config  { background: rgba(245,158,11,0.1);  color: #FBBF24; }
+        .tag-run     { background: rgba(34,197,94,0.1);   color: #4ADE80; }
+        .tag-daily   { background: rgba(255,147,160,0.12); color: var(--pandora-pink); }
+
         /* ========== Scroll animations ========== */
         .fade-in {
             opacity: 0;
@@ -795,7 +975,7 @@
         <h1>Product Manager <span>Agent</span></h1>
         <p class="header-subtitle">AI-powered product management for Pandora Digital teams. Write stories, resolve queries, create docs &mdash; all following best practices. Supports PVA, CARE, LOYALTY and more.</p>
         <div class="header-badges">
-            <span class="badge"><span class="badge-icon">&#9881;</span> 10 Slash Commands</span>
+            <span class="badge"><span class="badge-icon">&#9881;</span> 11 Slash Commands</span>
             <span class="badge"><span class="badge-icon">&#9889;</span> Jira REST API</span>
             <span class="badge"><span class="badge-icon">&#128196;</span> Confluence</span>
             <span class="badge"><span class="badge-icon">&#127912;</span> Figma Integration</span>
@@ -811,6 +991,7 @@
             <a href="#architecture" class="nav-link">Architecture</a>
             <a href="#standards" class="nav-link">Standards</a>
             <a href="#benefits" class="nav-link">Benefits</a>
+            <a href="#get-started" class="nav-link">Get Started</a>
         </div>
     </nav>
 
@@ -819,7 +1000,7 @@
         <section style="padding-bottom: 0; border: none;">
             <div class="stats-bar fade-in">
                 <div class="stat-item">
-                    <div class="stat-value">10</div>
+                    <div class="stat-value">11</div>
                     <div class="stat-label">Slash Commands</div>
                 </div>
                 <div class="stat-item">
@@ -827,7 +1008,7 @@
                     <div class="stat-label">Teams Supported</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value">5</div>
+                    <div class="stat-value">6</div>
                     <div class="stat-label">Quality Frameworks</div>
                 </div>
                 <div class="stat-item">
@@ -872,6 +1053,12 @@
                 </div>
                 <div class="feature-card fade-in">
                     <div class="feature-icon">&#128269;</div>
+                    <h3>Confluence Search &amp; Q&amp;A</h3>
+                    <p>Navigates the team's Confluence space using CQL to answer questions directly. Surfaces relevant pages, cites sources, posts answers back to Jira, and flags missing documentation for creation.</p>
+                    <span class="feature-tag">CQL Search</span>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">&#128269;</div>
                     <h3>Story Quality Audits</h3>
                     <p>Runs quality audits across epics or sprints. Detects anti-patterns: vague ACs, compound criteria, missing negative paths, solutions-in-disguise.</p>
                     <span class="feature-tag">Quality Gate</span>
@@ -887,6 +1074,12 @@
                     <h3>Epic Decomposition</h3>
                     <p>Breaks epics into sprint-ready stories using SPIDR methodology &mdash; Spike, Paths, Interfaces, Data, Rules. Identifies gaps in coverage.</p>
                     <span class="feature-tag">SPIDR</span>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">&#128683;</div>
+                    <h3>Duplicate Story Detection</h3>
+                    <p>Before creating any story, searches the active project board using two JQL passes. If a match is found, presents it in a table and asks: Continue, Skip, or Update the existing story.</p>
+                    <span class="feature-tag">Jira Search</span>
                 </div>
                 <div class="feature-card fade-in">
                     <div class="feature-icon">&#128260;</div>
@@ -909,7 +1102,7 @@
         <section id="commands">
             <span class="section-label">Slash Commands</span>
             <h2 class="section-title">Skills &amp; Commands</h2>
-            <p class="section-desc">Ten purpose-built commands that cover the full PM lifecycle &mdash; from story creation to quality audits.</p>
+            <p class="section-desc">Eleven purpose-built commands that cover the full PM lifecycle &mdash; from story creation to Confluence Q&amp;A and quality audits.</p>
 
             <div class="commands-table-wrap fade-in">
                 <table class="commands-table">
@@ -925,7 +1118,7 @@
                             <td><span class="cmd-name">/write-story</span></td>
                             <td>
                                 <div class="cmd-desc">Create a new Jira user story</div>
-                                <div class="cmd-detail">Parses natural language, finds the right epic, checks for duplicates, drafts with INVEST compliance and Gherkin ACs, creates via Jira REST API.</div>
+                                <div class="cmd-detail">Parses natural language, finds the right epic, runs a two-pass duplicate search &mdash; if a match is found, prompts <strong>Continue / Skip / Update</strong> before proceeding. Drafts with INVEST compliance and Gherkin ACs, then creates via Jira REST API.</div>
                             </td>
                             <td><span class="cmd-category cat-write">Write</span></td>
                         </tr>
@@ -949,9 +1142,17 @@
                             <td><span class="cmd-name">/resolve-query</span></td>
                             <td>
                                 <div class="cmd-desc">Answer team queries from Jira comments</div>
-                                <div class="cmd-detail">Reads dev/UX/QE comments, gathers context from ACs and related stories, posts structured response prefixed with [PM Agent].</div>
+                                <div class="cmd-detail">Reads dev/UX/QE comments, gathers context from ACs and related stories. If Jira alone can't answer, falls back to a Confluence CQL search — cites source pages in the response. Posts structured reply prefixed with [PM Agent].</div>
                             </td>
                             <td><span class="cmd-category cat-review">Review</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="cmd-name">/search-confluence</span></td>
+                            <td>
+                                <div class="cmd-desc">Search Confluence and answer questions</div>
+                                <div class="cmd-detail">Runs a multi-pass CQL search across the team's Confluence space. Summarises relevant pages, cites sources, optionally posts the answer to a Jira issue, and flags documentation gaps for <code>/create-doc</code>.</div>
+                            </td>
+                            <td><span class="cmd-category cat-docs">Docs</span></td>
                         </tr>
                         <tr>
                             <td><span class="cmd-name">/create-doc</span></td>
@@ -965,7 +1166,7 @@
                             <td><span class="cmd-name">/decompose-epic</span></td>
                             <td>
                                 <div class="cmd-desc">Break epic into stories via SPIDR</div>
-                                <div class="cmd-detail">Analyzes existing coverage, applies Spike/Paths/Interfaces/Data/Rules decomposition, proposes new stories with priority order.</div>
+                                <div class="cmd-detail">Analyzes existing coverage, applies Spike/Paths/Interfaces/Data/Rules decomposition, proposes new stories with priority order. Runs a per-story duplicate check at creation time &mdash; Skip or Create for each match.</div>
                             </td>
                             <td><span class="cmd-category cat-write">Write</span></td>
                         </tr>
@@ -1071,6 +1272,7 @@
 <span class="file">      sync-kb.md</span>                   <span class="comment"># /sync-kb</span>
 <span class="file">      audit-stories.md</span>             <span class="comment"># /audit-stories</span>
 <span class="file">      review-figma.md</span>              <span class="comment"># /review-figma</span>
+<span class="file">      search-confluence.md</span>         <span class="comment"># /search-confluence</span>
 <span class="file">      generate-traceability.md</span>     <span class="comment"># /generate-traceability</span>
 
 <span class="folder">    memories/</span>                       <span class="comment"># Persistent agent memory</span>
@@ -1247,7 +1449,266 @@
                         <p>Quality audits and knowledge base sync give real-time visibility into AC coverage, test gaps, and story quality across all 40 epics.</p>
                     </div>
                 </div>
+                <div class="benefit-card fade-in">
+                    <div class="benefit-num">9</div>
+                    <div>
+                        <h3>No Duplicate Stories</h3>
+                        <p>Before any story is created, the agent searches the board for matches. If a duplicate is found, you choose: continue, skip, or improve the existing story &mdash; keeping the backlog clean.</p>
+                    </div>
+                </div>
+                <div class="benefit-card fade-in">
+                    <div class="benefit-num">10</div>
+                    <div>
+                        <h3>Confluence as a Knowledge Source</h3>
+                        <p>Team documentation is no longer siloed. The agent searches Confluence pages to answer questions, surfaces the exact source pages, and flags gaps where documentation is missing or outdated.</p>
+                    </div>
+                </div>
             </div>
+        </section>
+    </div>
+
+    <!-- Get Started -->
+    <div class="container">
+        <section id="get-started">
+            <span class="section-label">For Product Managers</span>
+            <h2 class="section-title">Get Started — No Coding Required</h2>
+            <p class="section-desc">Everything you need to set up the PM Agent for your team, step by step. You only need to do the setup once. After that, it's just slash commands.</p>
+
+            <div class="steps-list">
+
+                <!-- Step 1 -->
+                <div class="step fade-in">
+                    <div class="step-num"><div class="step-num-circle">1</div></div>
+                    <div class="step-body">
+                        <span class="step-tag tag-setup">One-time Setup</span>
+                        <h3>Install Claude Code</h3>
+                        <p class="step-sub">The PM Agent runs inside Claude Code — Anthropic's AI assistant for your terminal.</p>
+                        <p>Open your Mac <strong>Terminal</strong> app (search "Terminal" in Spotlight). Then run this single command to install Claude Code:</p>
+                        <div class="code-block">npm install -g @anthropic-ai/claude-code</div>
+                        <p>Once installed, log in with your Anthropic account:</p>
+                        <div class="code-block">claude</div>
+                        <div class="tip-box">
+                            <span class="tip-icon">💡</span>
+                            <p><strong>Don't have npm?</strong> Download and install <a href="https://nodejs.org" style="color:var(--pandora-pink);font-weight:600;">Node.js</a> first (takes 2 minutes), then run the command above. If you see a version number when you type <code style="font-size:12px;">node -v</code>, you're good to go.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step fade-in">
+                    <div class="step-num"><div class="step-num-circle">2</div></div>
+                    <div class="step-body">
+                        <span class="step-tag tag-setup">One-time Setup</span>
+                        <h3>Get the PM Agent onto Your Machine</h3>
+                        <p class="step-sub">Create a branch for your team and download the agent.</p>
+                        <p>In Terminal, navigate to where you want to keep the project (e.g. your Desktop), then run:</p>
+                        <div class="code-block"><span class="code-comment"># Clone the repo</span>
+git clone https://github.com/sabha-pandora/PND-PM-AGENT.git
+cd PND-PM-AGENT
+
+<span class="code-comment"># Create a branch for your team (replace CARE with your team name)</span>
+git checkout -b team/CARE</div>
+                        <div class="tip-box">
+                            <span class="tip-icon">📌</span>
+                            <p><strong>Why a branch?</strong> Each team keeps their own branch so your team's config and knowledge base don't clash with other teams. You never merge this back — it's your team's permanent workspace.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="step fade-in">
+                    <div class="step-num"><div class="step-num-circle">3</div></div>
+                    <div class="step-body">
+                        <span class="step-tag tag-config">Configuration</span>
+                        <h3>Configure Your Jira &amp; Confluence Credentials</h3>
+                        <p class="step-sub">Tell the agent which project board to connect to and how to authenticate.</p>
+                        <p>Copy the example config file and open it in any text editor:</p>
+                        <div class="code-block">cp .env.example .env
+open .env</div>
+                        <p>Fill in these values — replace everything inside the quotes:</p>
+                        <div class="code-block env-table">
+                            <table style="border-collapse:collapse;width:100%;font-family:inherit;font-size:inherit;">
+                                <tr>
+                                    <td style="padding:4px 16px 4px 0;white-space:nowrap;vertical-align:top;color:var(--text-muted);font-style:italic;"># Your login email</td>
+                                    <td style="padding:4px 0;white-space:nowrap;"><span class="code-key">JIRA_EMAIL</span>=<span class="code-value">"your-name@pandora.com"</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:4px 16px 4px 0;white-space:nowrap;vertical-align:top;color:var(--text-muted);font-style:italic;"># From id.atlassian.com → Security → API tokens</td>
+                                    <td style="padding:4px 0;white-space:nowrap;"><span class="code-key">JIRA_API_TOKEN</span>=<span class="code-value">"paste-your-token-here"</span></td>
+                                </tr>
+                                <tr style="border-top:1px solid var(--border-light);">
+                                    <td style="padding:12px 16px 4px 0;white-space:nowrap;vertical-align:top;color:var(--text-muted);font-style:italic;"># Visible in your Jira board URL</td>
+                                    <td style="padding:12px 0 4px;white-space:nowrap;"><span class="code-key">JIRA_PROJECT_KEY</span>=<span class="code-value">"CARE"</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:4px 16px 4px 0;white-space:nowrap;vertical-align:top;color:var(--text-muted);font-style:italic;"># Human-readable team name</td>
+                                    <td style="padding:4px 0;white-space:nowrap;"><span class="code-key">PROJECT_NAME</span>=<span class="code-value">"Pandora Care Team"</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:4px 16px 4px 0;white-space:nowrap;vertical-align:top;color:var(--text-muted);font-style:italic;"># Used as prefix in story titles</td>
+                                    <td style="padding:4px 0;white-space:nowrap;"><span class="code-key">STORY_PREFIX</span>=<span class="code-value">"CARE"</span></td>
+                                </tr>
+                                <tr style="border-top:1px solid var(--border-light);">
+                                    <td style="padding:12px 16px 4px 0;white-space:nowrap;vertical-align:top;color:var(--text-muted);font-style:italic;"># Confluence → Space Settings → Space Details</td>
+                                    <td style="padding:12px 0 4px;white-space:nowrap;"><span class="code-key">CONFLUENCE_SPACE_ID</span>=<span class="code-value">"your-space-id"</span></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="tip-box">
+                            <span class="tip-icon">🔑</span>
+                            <p><strong>Where is my Jira project key?</strong> Open your Jira board in a browser. Look at the URL — it will say something like <code style="font-size:12px;">jira.../projects/CARE/boards</code>. The word in capitals is your project key.</p>
+                        </div>
+                        <div class="tip-box">
+                            <span class="tip-icon">🔒</span>
+                            <p><strong>The <code style="font-size:12px;">.env</code> file is private.</strong> It is listed in <code style="font-size:12px;">.gitignore</code> so it will never be accidentally committed or shared. Never paste your API token anywhere else.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="step fade-in">
+                    <div class="step-num"><div class="step-num-circle">4</div></div>
+                    <div class="step-body">
+                        <span class="step-tag tag-run">First Run</span>
+                        <h3>Launch the Agent</h3>
+                        <p class="step-sub">Start Claude Code inside the project folder.</p>
+                        <p>In Terminal, make sure you're inside the <code style="font-size:13px;">PND-PM-AGENT</code> folder, then run:</p>
+                        <div class="code-block">claude</div>
+                        <p>Claude Code will open an interactive session. You'll see a prompt where you can type slash commands or ask questions in plain English. That's it — you're in.</p>
+                        <div class="tip-box">
+                            <span class="tip-icon">✅</span>
+                            <p><strong>Quick test:</strong> Type <span class="inline-cmd">/sync-kb</span> and press Enter. If it starts fetching your Jira board, everything is connected correctly.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="step fade-in">
+                    <div class="step-num"><div class="step-num-circle">5</div></div>
+                    <div class="step-body">
+                        <span class="step-tag tag-run">First Run</span>
+                        <h3>Sync Your Knowledge Base</h3>
+                        <p class="step-sub">Pull your entire Jira board into a local snapshot so the agent has full context.</p>
+                        <p>Run this command once when you first set up, and again whenever your board has changed significantly:</p>
+                        <div class="code-block">/sync-kb</div>
+                        <p>This fetches all your epics, stories, acceptance criteria coverage, and test gaps into <code style="font-size:13px;">docs/care/knowledge_base.json</code>. The agent reads this to give you relevant, board-aware answers instead of generic ones.</p>
+                        <div class="tip-box">
+                            <span class="tip-icon">📅</span>
+                            <p><strong>When should I re-run it?</strong> The agent will remind you if the snapshot is more than 7 days old. As a rule of thumb: run it at the start of each sprint, after a bulk import of stories, or whenever you've added a new epic.</p>
+                        </div>
+                        <ul class="checklist">
+                            <li>Run at the start of each sprint</li>
+                            <li>After importing stories in bulk</li>
+                            <li>After adding a new epic or major feature area</li>
+                            <li>When the agent's answers seem out of date</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="step fade-in">
+                    <div class="step-num"><div class="step-num-circle">6</div></div>
+                    <div class="step-body">
+                        <span class="step-tag tag-daily">Daily Use</span>
+                        <h3>Write Your First User Story</h3>
+                        <p class="step-sub">Describe a feature in plain English — the agent handles the rest.</p>
+                        <p>Just type what you need. You don't need Jira-specific language:</p>
+                        <div class="code-block">/write-story the customer should be able to track their repair order status in real time</div>
+                        <p>The agent will find the right parent epic, check for duplicates, draft the story with full acceptance criteria, and ask for your approval before creating it in Jira.</p>
+                        <div class="tip-box">
+                            <span class="tip-icon">💬</span>
+                            <p><strong>Not sure which command to use?</strong> Just describe what you want in plain English — e.g. <em>"improve story CARE-234"</em> or <em>"write ACs for the returns flow"</em> — and Claude will pick the right command automatically.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 7 -->
+                <div class="step fade-in">
+                    <div class="step-num"><div class="step-num-circle">7</div></div>
+                    <div class="step-body">
+                        <span class="step-tag tag-daily">Daily Use</span>
+                        <h3>Generate a Traceability Matrix</h3>
+                        <p class="step-sub">Get a full picture of AC coverage and test gaps across your board — in one command.</p>
+                        <p>Run this before sprint planning, stakeholder reviews, or QE handoffs:</p>
+                        <div class="code-block">/generate-traceability</div>
+                        <p>The agent produces two files in your <code style="font-size:13px;">docs/care/</code> folder:</p>
+                        <ul class="checklist">
+                            <li><strong>traceability.md</strong> — a markdown table linking every story to its ACs and test status</li>
+                            <li><strong>care_traceability.html</strong> — an interactive dashboard with charts, search, filters, and a gap analysis you can open in any browser</li>
+                        </ul>
+                        <div class="tip-box">
+                            <span class="tip-icon">📊</span>
+                            <p><strong>Share with stakeholders</strong> by opening the HTML file in your browser and using your browser's print-to-PDF option. No login or special tool required.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 8 -->
+                <div class="step fade-in">
+                    <div class="step-num"><div class="step-num-circle">8</div></div>
+                    <div class="step-body">
+                        <span class="step-tag tag-daily">Daily Use</span>
+                        <h3>Answer Team Questions from Confluence</h3>
+                        <p class="step-sub">When your team asks "how does X work?", let the agent look it up.</p>
+                        <p>Search your team's Confluence space directly:</p>
+                        <div class="code-block">/search-confluence how does the VIP eligibility rule work?</div>
+                        <p>Or resolve a Jira comment query — the agent will check Confluence automatically if the story doesn't have enough context:</p>
+                        <div class="code-block">/resolve-query CARE-456</div>
+                        <p>The agent will cite the exact Confluence pages it used, post the answer back to Jira, and flag any documentation that is missing or outdated.</p>
+                    </div>
+                </div>
+
+                <!-- Step 9 -->
+                <div class="step fade-in">
+                    <div class="step-num"><div class="step-num-circle">9</div></div>
+                    <div class="step-body">
+                        <span class="step-tag tag-daily">Good to Know</span>
+                        <h3>Switching Between Teams</h3>
+                        <p class="step-sub">If you support more than one Pandora team, switching takes seconds.</p>
+                        <p>Open your <code style="font-size:13px;">.env</code> file and change the three team lines:</p>
+                        <div class="code-block">
+                            <table style="border-collapse:collapse;font-family:inherit;font-size:inherit;">
+                                <tr><td style="padding:3px 16px 3px 0;white-space:nowrap;"><span class="code-key">JIRA_PROJECT_KEY</span>=<span class="code-value">"LOYALTY"</span></td><td style="padding:3px 0;color:var(--text-muted);font-style:italic;">← your team's Jira key</td></tr>
+                                <tr><td style="padding:3px 16px 3px 0;white-space:nowrap;"><span class="code-key">PROJECT_NAME</span>=<span class="code-value">"Pandora Loyalty Team"</span></td><td style="padding:3px 0;color:var(--text-muted);font-style:italic;">← team display name</td></tr>
+                                <tr><td style="padding:3px 16px 3px 0;white-space:nowrap;"><span class="code-key">STORY_PREFIX</span>=<span class="code-value">"LOYALTY"</span></td><td style="padding:3px 0;color:var(--text-muted);font-style:italic;">← prefix in story titles</td></tr>
+                            </table>
+                        </div>
+                        <p>Then run <span class="inline-cmd">/sync-kb</span> to load that team's board. Every command will now operate against the Loyalty project. Switch back by changing the values again.</p>
+                        <div class="tip-box">
+                            <span class="tip-icon">📁</span>
+                            <p><strong>Each team's data is kept separate.</strong> PVA data lives in <code style="font-size:12px;">docs/pva/</code>, CARE in <code style="font-size:12px;">docs/care/</code>, LOYALTY in <code style="font-size:12px;">docs/loyalty/</code> — switching teams never overwrites another team's knowledge base.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- end steps-list -->
+
+            <!-- Quick Reference Card -->
+            <div class="arch-diagram fade-in" style="margin-top: 16px;">
+                <span class="section-label" style="display:block;margin-bottom:16px;">Quick Reference — Commands at a Glance</span>
+                <table class="commands-table" style="font-size:13px;">
+                    <thead>
+                        <tr>
+                            <th>When you want to&hellip;</th>
+                            <th>Use this command</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Write a new user story</td><td><span class="inline-cmd">/write-story [describe the feature]</span></td></tr>
+                        <tr><td>Improve an existing story</td><td><span class="inline-cmd">/improve-story [ISSUE-KEY]</span></td></tr>
+                        <tr><td>Write or rewrite acceptance criteria</td><td><span class="inline-cmd">/write-ac [ISSUE-KEY]</span></td></tr>
+                        <tr><td>Answer a team comment in Jira</td><td><span class="inline-cmd">/resolve-query [ISSUE-KEY]</span></td></tr>
+                        <tr><td>Search Confluence for an answer</td><td><span class="inline-cmd">/search-confluence [your question]</span></td></tr>
+                        <tr><td>Break an epic into stories</td><td><span class="inline-cmd">/decompose-epic [EPIC-KEY]</span></td></tr>
+                        <tr><td>Audit story quality in a sprint</td><td><span class="inline-cmd">/audit-stories [epic or sprint]</span></td></tr>
+                        <tr><td>Create a Confluence page</td><td><span class="inline-cmd">/create-doc [topic or EPIC-KEY]</span></td></tr>
+                        <tr><td>Generate stories from a Figma design</td><td><span class="inline-cmd">/review-figma [Figma URL]</span></td></tr>
+                        <tr><td>Refresh the board snapshot</td><td><span class="inline-cmd">/sync-kb</span></td></tr>
+                        <tr><td>Generate traceability matrix</td><td><span class="inline-cmd">/generate-traceability</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
         </section>
     </div>
 
