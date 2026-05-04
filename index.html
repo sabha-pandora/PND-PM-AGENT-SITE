@@ -766,6 +766,244 @@
             .stats-bar { grid-template-columns: 1fr 1fr; gap: 12px; }
         }
 
+        /* ========== Architecture Diagram ========== */
+        .arch-full {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin-bottom: 40px;
+        }
+
+        .arch-zone {
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px 28px;
+            position: relative;
+        }
+
+        .arch-zone-user     { background: var(--bg-card); border-color: var(--pandora-pink-light); }
+        .arch-zone-instruction { background: rgba(59,130,246,0.04); border-color: rgba(59,130,246,0.25); }
+        .arch-zone-command  { background: rgba(255,147,160,0.04); border-color: rgba(255,147,160,0.3); }
+        .arch-zone-memory   { background: rgba(168,85,247,0.04); border-color: rgba(168,85,247,0.25); }
+        .arch-zone-kb       { background: rgba(245,158,11,0.04); border-color: rgba(245,158,11,0.25); }
+        .arch-zone-integrations { background: rgba(34,197,94,0.04); border-color: rgba(34,197,94,0.25); }
+
+        .arch-zone-label {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .arch-zone-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .arch-zone-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .arch-chip-input {
+            padding: 6px 14px;
+            background: var(--pandora-pink-glow);
+            border: 1px solid var(--pandora-pink-light);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .arch-block {
+            flex: 1;
+            min-width: 200px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 16px;
+        }
+
+        .arch-block-title {
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--pandora-pink);
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .arch-block-items {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .arch-block-items span {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            line-height: 1.4;
+        }
+
+        .arch-flow-arrow {
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            padding: 10px 0;
+        }
+
+        .arch-commands-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .arch-cmd-pill {
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            white-space: nowrap;
+        }
+
+        .arch-flow-note {
+            font-size: 12px;
+            color: var(--text-muted);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 4px 10px;
+            white-space: nowrap;
+        }
+
+        .arch-middle-row {
+            display: flex;
+            gap: 0;
+            align-items: stretch;
+        }
+
+        .arch-middle-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--text-muted);
+            padding: 0 12px;
+            flex-shrink: 0;
+        }
+
+        .arch-team-badge {
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 11px;
+            padding: 3px 8px;
+            background: rgba(245,158,11,0.1);
+            color: #FBBF24;
+            border-radius: 4px;
+        }
+
+        .arch-integration-card {
+            flex: 1;
+            min-width: 220px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .arch-int-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .arch-int-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .arch-int-detail {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            margin-bottom: 4px;
+        }
+
+        /* Data flow summary strip */
+        .arch-flow-summary {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .arch-flow-step {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 24px 16px;
+            gap: 10px;
+            border-right: 1px solid var(--border-light);
+        }
+
+        .arch-flow-step:last-child { border-right: none; }
+
+        .arch-flow-num {
+            width: 32px;
+            height: 32px;
+            background: var(--pandora-pink);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .arch-flow-text {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .arch-flow-text strong {
+            display: block;
+            color: var(--text-primary);
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .arch-flow-chevron {
+            display: none;
+        }
+
+        @media (max-width: 900px) {
+            .arch-middle-row { flex-direction: column; }
+            .arch-middle-arrow { transform: rotate(90deg); padding: 8px 0; }
+            .arch-flow-summary { flex-direction: column; }
+            .arch-flow-step { border-right: none; border-bottom: 1px solid var(--border-light); flex-direction: row; text-align: left; gap: 14px; }
+            .arch-flow-step:last-child { border-bottom: none; }
+            .arch-flow-chevron { display: none; }
+        }
+
         /* ========== Get Started ========== */
         .steps-list {
             counter-reset: step-counter;
@@ -1213,99 +1451,209 @@
         <section id="architecture">
             <span class="section-label">System Design</span>
             <h2 class="section-title">Architecture</h2>
-            <p class="section-desc">A Claude Code agent with structured commands, persistent memory, multi-team support, and direct Jira REST API integration.</p>
+            <p class="section-desc">Four distinct layers — from PM intent down to live Atlassian data — with persistent memory and multi-team config threading through every command.</p>
 
-            <!-- API Flow -->
-            <div class="api-flow fade-in">
-                <div class="api-node">
-                    <div class="api-node-icon">&#128100;</div>
-                    <div class="api-node-label">User</div>
-                    <div class="api-node-sub">Slash Command</div>
+            <!-- Full Architecture Diagram -->
+            <div class="arch-full fade-in">
+
+                <!-- Layer 0: User -->
+                <div class="arch-zone arch-zone-user">
+                    <div class="arch-zone-label">&#128100; Product Manager</div>
+                    <div class="arch-zone-row">
+                        <div class="arch-chip arch-chip-input">Natural language description</div>
+                        <div class="arch-chip arch-chip-input">/slash-command [args]</div>
+                        <div class="arch-chip arch-chip-input">Figma URL or Jira key</div>
+                    </div>
                 </div>
-                <div class="api-arrow">&#10132;</div>
-                <div class="api-node">
-                    <div class="api-node-icon">&#129302;</div>
-                    <div class="api-node-label">PM Agent</div>
-                    <div class="api-node-sub">Claude Code</div>
+
+                <div class="arch-flow-arrow">&#8595; invokes</div>
+
+                <!-- Layer 1: Instruction -->
+                <div class="arch-zone arch-zone-instruction">
+                    <div class="arch-zone-label">&#128214; Layer 1 — Instruction &amp; Standards</div>
+                    <div class="arch-zone-desc">Loaded into every session. Defines who the agent is, how it thinks, and what quality means.</div>
+                    <div class="arch-zone-row">
+                        <div class="arch-block">
+                            <div class="arch-block-title">&#128196; CLAUDE.md</div>
+                            <div class="arch-block-items">
+                                <span>User story format (As a / I want / So that)</span>
+                                <span>INVEST criteria checklist</span>
+                                <span>Gherkin BDD AC standards</span>
+                                <span>SPIDR decomposition rules</span>
+                                <span>Anti-pattern definitions</span>
+                                <span>DoR / DoD checklists</span>
+                                <span>Multi-team .env config</span>
+                                <span>Jira REST API patterns</span>
+                            </div>
+                        </div>
+                        <div class="arch-block">
+                            <div class="arch-block-title">&#128196; .env</div>
+                            <div class="arch-block-items">
+                                <span>JIRA_PROJECT_KEY</span>
+                                <span>JIRA_EMAIL + API_TOKEN</span>
+                                <span>PROJECT_NAME</span>
+                                <span>STORY_PREFIX</span>
+                                <span>CONFLUENCE_SPACE_ID</span>
+                                <span>CONFLUENCE_BASE_URL</span>
+                            </div>
+                        </div>
+                        <div class="arch-block">
+                            <div class="arch-block-title">&#128196; docs/shared/</div>
+                            <div class="arch-block-items">
+                                <span>user-stories-best-practices.docx</span>
+                                <span>Pandora quality standards</span>
+                                <span>Shared across all teams</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="api-arrow">&#10132;</div>
-                <div class="api-node">
-                    <div class="api-node-icon">&#128272;</div>
-                    <div class="api-node-label">Jira API</div>
-                    <div class="api-node-sub">REST v3 + API Key</div>
+
+                <div class="arch-flow-arrow">&#8595; routes to</div>
+
+                <!-- Layer 2: Command -->
+                <div class="arch-zone arch-zone-command">
+                    <div class="arch-zone-label">&#9881;&#65039; Layer 2 — Command Layer</div>
+                    <div class="arch-zone-desc">11 slash commands in <code>.claude/commands/</code> — each a step-by-step workflow spec. Team-agnostic; project key injected from .env at runtime.</div>
+                    <div class="arch-zone-row arch-commands-grid">
+                        <div class="arch-cmd-pill cat-write">&#9997; /write-story</div>
+                        <div class="arch-cmd-pill cat-review">&#9998; /improve-story</div>
+                        <div class="arch-cmd-pill cat-write">&#9745; /write-ac</div>
+                        <div class="arch-cmd-pill cat-review">&#128172; /resolve-query</div>
+                        <div class="arch-cmd-pill cat-docs">&#128269; /search-confluence</div>
+                        <div class="arch-cmd-pill cat-docs">&#128203; /create-doc</div>
+                        <div class="arch-cmd-pill cat-write">&#128736; /decompose-epic</div>
+                        <div class="arch-cmd-pill cat-ops">&#128260; /sync-kb</div>
+                        <div class="arch-cmd-pill cat-review">&#128270; /audit-stories</div>
+                        <div class="arch-cmd-pill cat-design">&#127912; /review-figma</div>
+                        <div class="arch-cmd-pill cat-ops">&#128202; /generate-traceability</div>
+                    </div>
+                    <div class="arch-zone-row" style="margin-top:16px;gap:12px;">
+                        <div class="arch-flow-note">&#128270; Read-before-write</div>
+                        <div class="arch-flow-note">&#128683; Duplicate check (2-pass JQL)</div>
+                        <div class="arch-flow-note">&#9989; User approval gate</div>
+                        <div class="arch-flow-note">&#128064; Verify-after-write</div>
+                    </div>
                 </div>
-                <div class="api-arrow">&#10132;</div>
-                <div class="api-node">
-                    <div class="api-node-icon">&#128203;</div>
-                    <div class="api-node-label">Confluence</div>
-                    <div class="api-node-sub">REST API v2</div>
+
+                <div class="arch-flow-arrow">&#8595; reads / writes via</div>
+
+                <!-- Layer 3: Memory + KB (side by side) -->
+                <div class="arch-zone-row arch-middle-row">
+                    <div class="arch-zone arch-zone-memory" style="flex:1;">
+                        <div class="arch-zone-label">&#129504; Layer 3a — Memory</div>
+                        <div class="arch-zone-desc">Persistent context that survives across sessions.</div>
+                        <div class="arch-block" style="margin-top:12px;">
+                            <div class="arch-block-title">.claude/memories/</div>
+                            <div class="arch-block-items">
+                                <span>&#128196; project-context.md — team config &amp; workflows</span>
+                                <span>&#128196; jira-conventions.md — naming patterns, labels</span>
+                                <span>&#128196; decision-log.md — cross-team decisions</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arch-middle-arrow">&#8644;</div>
+
+                    <div class="arch-zone arch-zone-kb" style="flex:1;">
+                        <div class="arch-zone-label">&#128202; Layer 3b — Knowledge Base</div>
+                        <div class="arch-zone-desc">Local snapshot of each team's Jira board. Refreshed by <code>/sync-kb</code>.</div>
+                        <div class="arch-block" style="margin-top:12px;">
+                            <div class="arch-block-title">docs/{team}/</div>
+                            <div class="arch-block-items">
+                                <span>&#128196; knowledge_base.json — structured board state</span>
+                                <span>&#128196; knowledge_base.md — human-readable state</span>
+                                <span>&#128196; traceability.md — coverage matrix</span>
+                                <span>&#127760; {team}_traceability.html — interactive dashboard</span>
+                            </div>
+                        </div>
+                        <div class="arch-block" style="margin-top:8px;">
+                            <div class="arch-block-title">Teams</div>
+                            <div class="arch-block-items" style="flex-direction:row;gap:8px;flex-wrap:wrap;">
+                                <span class="arch-team-badge">docs/pva/</span>
+                                <span class="arch-team-badge">docs/care/</span>
+                                <span class="arch-team-badge">docs/loyalty/</span>
+                                <span class="arch-team-badge">docs/{team}/</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arch-flow-arrow">&#8595; calls via REST API / MCP</div>
+
+                <!-- Layer 4: External Integrations -->
+                <div class="arch-zone arch-zone-integrations">
+                    <div class="arch-zone-label">&#127760; Layer 4 — External Integrations</div>
+                    <div class="arch-zone-desc">All external calls use Basic Auth (email + API token). Read-before-write and verify-after-write on every mutation.</div>
+                    <div class="arch-zone-row">
+                        <div class="arch-integration-card">
+                            <div class="arch-int-icon">&#128272;</div>
+                            <div class="arch-int-name">Jira REST API v3</div>
+                            <div class="arch-int-detail">pandoradigital.atlassian.net</div>
+                            <div class="arch-block-items" style="text-align:left;margin-top:10px;">
+                                <span>GET /issue/{key} — fetch story</span>
+                                <span>POST /search/jql — duplicate check</span>
+                                <span>POST /issue — create story</span>
+                                <span>PUT /issue/{key} — update story</span>
+                                <span>POST /issue/{key}/comment — reply</span>
+                                <span>POST /issue/{key}/transitions — move status</span>
+                            </div>
+                        </div>
+                        <div class="arch-integration-card">
+                            <div class="arch-int-icon">&#128203;</div>
+                            <div class="arch-int-name">Confluence REST API v2</div>
+                            <div class="arch-int-detail">pandoradigital.atlassian.net/wiki</div>
+                            <div class="arch-block-items" style="text-align:left;margin-top:10px;">
+                                <span>GET /content/search?cql — CQL search</span>
+                                <span>GET /pages/{id} — read page</span>
+                                <span>POST /pages — create page</span>
+                                <span>PUT /pages/{id} — update page</span>
+                                <span>POST /pages/{id}/footer-comments</span>
+                            </div>
+                        </div>
+                        <div class="arch-integration-card">
+                            <div class="arch-int-icon">&#127912;</div>
+                            <div class="arch-int-name">Figma MCP</div>
+                            <div class="arch-int-detail">Model Context Protocol</div>
+                            <div class="arch-block-items" style="text-align:left;margin-top:10px;">
+                                <span>get_design_context — full design data</span>
+                                <span>get_screenshot — visual reference</span>
+                                <span>get_metadata — component info</span>
+                                <span>Triggered by Figma URLs in stories</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- end arch-full -->
+
+            <!-- Data flow summary -->
+            <div class="arch-flow-summary fade-in">
+                <div class="arch-flow-step">
+                    <div class="arch-flow-num">1</div>
+                    <div class="arch-flow-text"><strong>PM invokes a command</strong><br>Natural language or slash command with optional issue key / Figma URL</div>
+                </div>
+                <div class="arch-flow-chevron">&#10132;</div>
+                <div class="arch-flow-step">
+                    <div class="arch-flow-num">2</div>
+                    <div class="arch-flow-text"><strong>Agent loads context</strong><br>Reads CLAUDE.md standards, .env team config, and KB snapshot</div>
+                </div>
+                <div class="arch-flow-chevron">&#10132;</div>
+                <div class="arch-flow-step">
+                    <div class="arch-flow-num">3</div>
+                    <div class="arch-flow-text"><strong>Jira / Confluence fetched</strong><br>Live data pulled via REST API; Figma MCP called if design URL present</div>
+                </div>
+                <div class="arch-flow-chevron">&#10132;</div>
+                <div class="arch-flow-step">
+                    <div class="arch-flow-num">4</div>
+                    <div class="arch-flow-text"><strong>Draft presented for approval</strong><br>Agent shows output and waits for explicit PM confirmation</div>
+                </div>
+                <div class="arch-flow-chevron">&#10132;</div>
+                <div class="arch-flow-step">
+                    <div class="arch-flow-num">5</div>
+                    <div class="arch-flow-text"><strong>Written back to Jira</strong><br>Create/update via REST API, verified by read-back; KB updated locally</div>
                 </div>
             </div>
 
-            <!-- File Structure -->
-            <div class="arch-diagram fade-in">
-                <pre class="arch-tree"><span class="folder">PANDORA-PM-AGENT/</span>
-<span class="file">  CLAUDE.md</span>                         <span class="comment"># Agent brain &mdash; standards, rules, multi-team config</span>
-<span class="file">  .env</span>                              <span class="comment"># Team config + Jira API credentials (gitignored)</span>
-<span class="file">  .env.example</span>                      <span class="comment"># Template for setup</span>
-<span class="file">  index.html</span>                        <span class="comment"># This page &mdash; agent documentation</span>
-
-<span class="folder">  docs/</span>
-<span class="folder">    shared/</span>                         <span class="comment"># Standards shared across all teams</span>
-<span class="file">      user-stories-best-practices.docx</span>
-<span class="folder">    pva/</span>                            <span class="comment"># PVA team knowledge base</span>
-<span class="file">      knowledge_base.json</span>           <span class="comment"># Structured board state</span>
-<span class="file">      knowledge_base.md</span>             <span class="comment"># Human-readable board state</span>
-<span class="file">      traceability.md</span>               <span class="comment"># Traceability matrix</span>
-<span class="file">      pva_traceability.html</span>         <span class="comment"># Interactive dashboard</span>
-<span class="folder">    care/</span>                           <span class="comment"># CARE team knowledge base</span>
-<span class="folder">    loyalty/</span>                        <span class="comment"># LOYALTY team knowledge base</span>
-
-<span class="folder">  .claude/</span>
-<span class="folder">    commands/</span>                       <span class="comment"># 10 slash commands (team-agnostic)</span>
-<span class="file">      write-story.md</span>               <span class="comment"># /write-story</span>
-<span class="file">      improve-story.md</span>             <span class="comment"># /improve-story</span>
-<span class="file">      write-ac.md</span>                  <span class="comment"># /write-ac</span>
-<span class="file">      resolve-query.md</span>             <span class="comment"># /resolve-query</span>
-<span class="file">      create-doc.md</span>                <span class="comment"># /create-doc</span>
-<span class="file">      decompose-epic.md</span>            <span class="comment"># /decompose-epic</span>
-<span class="file">      sync-kb.md</span>                   <span class="comment"># /sync-kb</span>
-<span class="file">      audit-stories.md</span>             <span class="comment"># /audit-stories</span>
-<span class="file">      review-figma.md</span>              <span class="comment"># /review-figma</span>
-<span class="file">      search-confluence.md</span>         <span class="comment"># /search-confluence</span>
-<span class="file">      generate-traceability.md</span>     <span class="comment"># /generate-traceability</span>
-
-<span class="folder">    memories/</span>                       <span class="comment"># Persistent agent memory</span>
-<span class="file">      project-context.md</span>            <span class="comment"># Multi-team config, workflows</span>
-<span class="file">      jira-conventions.md</span>           <span class="comment"># Naming patterns, labels</span>
-<span class="file">      decision-log.md</span>              <span class="comment"># Cross-team decision history</span>
-
-<span class="file">    settings.json</span>                   <span class="comment"># Permissions &amp; environment</span></pre>
-            </div>
-
-            <!-- Architecture Layers -->
-            <div class="arch-layers">
-                <div class="arch-layer fade-in">
-                    <div class="arch-layer-num">1</div>
-                    <h4>Instruction Layer</h4>
-                    <p>CLAUDE.md defines agent identity, user story standards, AC format, SPIDR rules, multi-team config, and API patterns.</p>
-                </div>
-                <div class="arch-layer fade-in">
-                    <div class="arch-layer-num">2</div>
-                    <h4>Command Layer</h4>
-                    <p>10 slash commands in <code>.claude/commands/</code> with step-by-step workflows for each PM task.</p>
-                </div>
-                <div class="arch-layer fade-in">
-                    <div class="arch-layer-num">3</div>
-                    <h4>Memory Layer</h4>
-                    <p>Persistent context in <code>.claude/memories/</code> stores project config, conventions, and decision history.</p>
-                </div>
-                <div class="arch-layer fade-in">
-                    <div class="arch-layer-num">4</div>
-                    <h4>Integration Layer</h4>
-                    <p>Jira REST API v3 with API key auth. Confluence API for docs. Figma MCP for designs. Team-specific KB in <code>docs/{team}/</code>.</p>
-                </div>
-            </div>
         </section>
     </div>
 
