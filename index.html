@@ -1254,7 +1254,7 @@
         <img src="assets/pandora_logo_102224_rgb.webp" alt="Pandora" class="header-logo">
         <div class="header-divider"></div>
         <h1>Product Manager <span>Agent</span></h1>
-        <p class="header-subtitle">AI-powered product management for Pandora Digital teams. Write stories, resolve queries, create docs &mdash; all following best practices. Supports PVA, CARE, LOYALTY and more.</p>
+        <p class="header-subtitle">AI-powered product management for Pandora Digital teams. Write stories, resolve queries, create docs &mdash; all following best practices.</p>
         <div class="header-badges">
             <span class="badge"><span class="badge-icon">&#9881;</span> 12 Slash Commands</span>
             <span class="badge"><span class="badge-icon">&#9889;</span> Jira REST API</span>
@@ -1285,7 +1285,7 @@
                     <div class="stat-label">Slash Commands</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value">3+</div>
+                    <div class="stat-value">5</div>
                     <div class="stat-label">Teams Supported</div>
                 </div>
                 <div class="stat-item">
@@ -1628,9 +1628,10 @@
                             <div class="arch-block-title">Teams</div>
                             <div class="arch-block-items" style="flex-direction:row;gap:8px;flex-wrap:wrap;">
                                 <span class="arch-team-badge">docs/pva/</span>
-                                <span class="arch-team-badge">docs/care/</span>
-                                <span class="arch-team-badge">docs/loyalty/</span>
-                                <span class="arch-team-badge">docs/{team}/</span>
+                                <span class="arch-team-badge">docs/servicef/</span>
+                                <span class="arch-team-badge">docs/lp/</span>
+                                <span class="arch-team-badge">docs/pay/</span>
+                                <span class="arch-team-badge">docs/del/</span>
                             </div>
                         </div>
                     </div>
@@ -1808,7 +1809,7 @@
         <section id="benefits">
             <span class="section-label">Impact</span>
             <h2 class="section-title">Benefits</h2>
-            <p class="section-desc">How the PM Agent transforms product management workflow for the PVA team.</p>
+            <p class="section-desc">How the PM Agent transforms product management workflow for Pandora Digital teams.</p>
 
             <div class="benefits-grid">
                 <div class="benefit-card fade-in">
@@ -2129,15 +2130,15 @@ notepad .env</div>
                         </div>
                         <div class="code-block">
                             <table style="border-collapse:collapse;font-family:inherit;font-size:inherit;">
-                                <tr><td style="padding:3px 16px 3px 0;white-space:nowrap;"><span class="code-key">JIRA_PROJECT_KEY</span>=<span class="code-value">"LOYALTY"</span></td><td style="padding:3px 0;color:var(--text-muted);font-style:italic;">← your team's Jira key</td></tr>
+                                <tr><td style="padding:3px 16px 3px 0;white-space:nowrap;"><span class="code-key">JIRA_PROJECT_KEY</span>=<span class="code-value">"LP"</span></td><td style="padding:3px 0;color:var(--text-muted);font-style:italic;">← your team's Jira key</td></tr>
                                 <tr><td style="padding:3px 16px 3px 0;white-space:nowrap;"><span class="code-key">PROJECT_NAME</span>=<span class="code-value">"Pandora Loyalty Team"</span></td><td style="padding:3px 0;color:var(--text-muted);font-style:italic;">← team display name</td></tr>
-                                <tr><td style="padding:3px 16px 3px 0;white-space:nowrap;"><span class="code-key">STORY_PREFIX</span>=<span class="code-value">"LOYALTY"</span></td><td style="padding:3px 0;color:var(--text-muted);font-style:italic;">← prefix in story titles</td></tr>
+                                <tr><td style="padding:3px 16px 3px 0;white-space:nowrap;"><span class="code-key">STORY_PREFIX</span>=<span class="code-value">"LP"</span></td><td style="padding:3px 0;color:var(--text-muted);font-style:italic;">← prefix in story titles</td></tr>
                             </table>
                         </div>
-                        <p>Then run <span class="inline-cmd">/sync-kb</span> to load that team's board. Every command will now operate against the Loyalty project. Switch back by changing the values again.</p>
+                        <p>Then run <span class="inline-cmd">/sync-kb</span> to load that team's board. Every command will now operate against that project. Switch back by uncommenting a different team block.</p>
                         <div class="tip-box">
                             <span class="tip-icon">📁</span>
-                            <p><strong>Each team's data is kept separate.</strong> PVA data lives in <code style="font-size:12px;">docs/pva/</code>, CARE in <code style="font-size:12px;">docs/care/</code>, LOYALTY in <code style="font-size:12px;">docs/loyalty/</code> — switching teams never overwrites another team's knowledge base.</p>
+                            <p><strong>Each team's data is kept separate.</strong> PVA → <code style="font-size:12px;">docs/pva/</code> &bull; Care (SERVICEF) → <code style="font-size:12px;">docs/servicef/</code> &bull; Loyalty (LP) → <code style="font-size:12px;">docs/lp/</code> &bull; Pay → <code style="font-size:12px;">docs/pay/</code> &bull; Deliver (DEL) → <code style="font-size:12px;">docs/del/</code> — switching teams never overwrites another team's knowledge base.</p>
                         </div>
                     </div>
                 </div>
