@@ -1184,6 +1184,49 @@
         .tag-run     { background: rgba(34,197,94,0.1);   color: #4ADE80; }
         .tag-daily   { background: rgba(255,147,160,0.12); color: var(--pandora-pink); }
 
+        /* OS Toggle */
+        .os-toggle-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+        .os-toggle-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        .os-btn {
+            font-size: 13px;
+            font-weight: 700;
+            padding: 6px 20px;
+            border-radius: 20px;
+            border: 2px solid var(--border);
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .os-btn:hover { border-color: var(--pandora-pink); color: var(--pandora-pink); }
+        .os-btn.active {
+            background: var(--pandora-pink);
+            border-color: var(--pandora-pink);
+            color: #fff;
+        }
+        .os-block { display: none; }
+        .os-block.visible { display: block; }
+        kbd {
+            display: inline-block;
+            font-size: 11px;
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            padding: 1px 6px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: var(--bg-code);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
         /* ========== Scroll animations ========== */
         .fade-in {
             opacity: 0;
@@ -1213,7 +1256,7 @@
         <h1>Product Manager <span>Agent</span></h1>
         <p class="header-subtitle">AI-powered product management for Pandora Digital teams. Write stories, resolve queries, create docs &mdash; all following best practices. Supports PVA, CARE, LOYALTY and more.</p>
         <div class="header-badges">
-            <span class="badge"><span class="badge-icon">&#9881;</span> 11 Slash Commands</span>
+            <span class="badge"><span class="badge-icon">&#9881;</span> 12 Slash Commands</span>
             <span class="badge"><span class="badge-icon">&#9889;</span> Jira REST API</span>
             <span class="badge"><span class="badge-icon">&#128196;</span> Confluence</span>
             <span class="badge"><span class="badge-icon">&#127912;</span> Figma Integration</span>
@@ -1238,7 +1281,7 @@
         <section style="padding-bottom: 0; border: none;">
             <div class="stats-bar fade-in">
                 <div class="stat-item">
-                    <div class="stat-value">11</div>
+                    <div class="stat-value">12</div>
                     <div class="stat-label">Slash Commands</div>
                 </div>
                 <div class="stat-item">
@@ -1331,6 +1374,12 @@
                     <p>Generates a full traceability matrix as both markdown and an interactive HTML dashboard with charts, search, filtering, and gap analysis across all epics and stories.</p>
                     <span class="feature-tag">Dashboard</span>
                 </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">&#128193;</div>
+                    <h3>Repo Intelligence</h3>
+                    <p>Scans DEV and QE repositories — local git or Azure DevOps — to summarise what has been implemented. Groups findings by functional area, surfaces Jira keys from commit history, and flags in-flight branches so PMs write stories for what's actually missing.</p>
+                    <span class="feature-tag">Azure DevOps</span>
+                </div>
             </div>
         </section>
     </div>
@@ -1340,7 +1389,7 @@
         <section id="commands">
             <span class="section-label">Slash Commands</span>
             <h2 class="section-title">Skills &amp; Commands</h2>
-            <p class="section-desc">Eleven purpose-built commands that cover the full PM lifecycle &mdash; from story creation to Confluence Q&amp;A and quality audits.</p>
+            <p class="section-desc">Twelve purpose-built commands that cover the full PM lifecycle &mdash; from story creation to Confluence Q&amp;A, quality audits, and repo intelligence.</p>
 
             <div class="commands-table-wrap fade-in">
                 <table class="commands-table">
@@ -1440,6 +1489,14 @@
                             </td>
                             <td><span class="cmd-category cat-ops">Ops</span></td>
                         </tr>
+                        <tr>
+                            <td><span class="cmd-name">/scan-repo</span></td>
+                            <td>
+                                <div class="cmd-desc">Scan DEV &amp; QE repos for implementation context</div>
+                                <div class="cmd-detail">Reads a local git repo or Azure DevOps repository. Extracts recent commits, merged PRs, active branches, and folder structure. Groups findings by functional area, cross-references Jira keys found in commit messages, and saves a PM-readable summary to <code>docs/{team}/repo_summary_*.md</code> for use with <strong>/write-story</strong>. Supports <code>--days=N</code>, <code>--epic=KEY</code>, and <code>--post-to-confluence</code> flags.</div>
+                            </td>
+                            <td><span class="cmd-category cat-ops">Ops</span></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -1513,7 +1570,7 @@
                 <!-- Layer 2: Command -->
                 <div class="arch-zone arch-zone-command">
                     <div class="arch-zone-label">&#9881;&#65039; Layer 2 — Command Layer</div>
-                    <div class="arch-zone-desc">11 slash commands in <code>.claude/commands/</code> — each a step-by-step workflow spec. Team-agnostic; project key injected from .env at runtime.</div>
+                    <div class="arch-zone-desc">12 slash commands in <code>.claude/commands/</code> — each a step-by-step workflow spec. Team-agnostic; project key injected from .env at runtime.</div>
                     <div class="arch-zone-row arch-commands-grid">
                         <div class="arch-cmd-pill cat-write">&#9997; /write-story</div>
                         <div class="arch-cmd-pill cat-review">&#9998; /improve-story</div>
@@ -1526,6 +1583,7 @@
                         <div class="arch-cmd-pill cat-review">&#128270; /audit-stories</div>
                         <div class="arch-cmd-pill cat-design">&#127912; /review-figma</div>
                         <div class="arch-cmd-pill cat-ops">&#128202; /generate-traceability</div>
+                        <div class="arch-cmd-pill cat-ops">&#128193; /scan-repo</div>
                     </div>
                     <div class="arch-zone-row" style="margin-top:16px;gap:12px;">
                         <div class="arch-flow-note">&#128270; Read-before-write</div>
@@ -1619,6 +1677,18 @@
                                 <span>get_screenshot — visual reference</span>
                                 <span>get_metadata — component info</span>
                                 <span>Triggered by Figma URLs in stories</span>
+                            </div>
+                        </div>
+                        <div class="arch-integration-card">
+                            <div class="arch-int-icon">&#128193;</div>
+                            <div class="arch-int-name">Azure DevOps REST API</div>
+                            <div class="arch-int-detail">dev.azure.com (PAT auth)</div>
+                            <div class="arch-block-items" style="text-align:left;margin-top:10px;">
+                                <span>GET /git/repositories/{repo}/commits</span>
+                                <span>GET /git/repositories/{repo}/pullrequests</span>
+                                <span>GET /git/repositories/{repo}/refs</span>
+                                <span>GET /git/repositories/{repo}/items</span>
+                                <span>Local git CLI (fallback / offline mode)</span>
                             </div>
                         </div>
                     </div>
@@ -1811,6 +1881,13 @@
                         <p>Team documentation is no longer siloed. The agent searches Confluence pages to answer questions, surfaces the exact source pages, and flags gaps where documentation is missing or outdated.</p>
                     </div>
                 </div>
+                <div class="benefit-card fade-in">
+                    <div class="benefit-num">11</div>
+                    <div>
+                        <h3>Implementation Context Before Writing</h3>
+                        <p>Before drafting a story, the agent can reference what the DEV and QE repos show has already been built. No more writing stories for work that's 80% done — and richer, more accurate acceptance criteria for what genuinely remains.</p>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
@@ -1822,6 +1899,12 @@
             <h2 class="section-title">Get Started — No Coding Required</h2>
             <p class="section-desc">Everything you need to set up the PM Agent for your team, step by step. You only need to do the setup once. After that, it's just slash commands.</p>
 
+            <div class="os-toggle-bar">
+                <span class="os-toggle-label">Choose your OS:</span>
+                <button class="os-btn active" id="btn-mac" onclick="switchOS('mac')">Mac</button>
+                <button class="os-btn" id="btn-win" onclick="switchOS('windows')">Windows</button>
+            </div>
+
             <div class="steps-list">
 
                 <!-- Step 1 -->
@@ -1831,7 +1914,12 @@
                         <span class="step-tag tag-setup">One-time Setup</span>
                         <h3>Install Claude Code</h3>
                         <p class="step-sub">The PM Agent runs inside Claude Code — Anthropic's AI assistant for your terminal.</p>
-                        <p>Open your Mac <strong>Terminal</strong> app (search "Terminal" in Spotlight). Then run this single command to install Claude Code:</p>
+                        <div class="os-block os-mac">
+                            <p>Open your <strong>Terminal</strong> app — press <kbd>⌘ Space</kbd>, type <em>Terminal</em>, press Enter. Then run this single command to install Claude Code:</p>
+                        </div>
+                        <div class="os-block os-windows">
+                            <p>Open <strong>Windows Terminal</strong> or <strong>Command Prompt</strong> — press <kbd>Win</kbd>, type <em>Terminal</em> or <em>cmd</em>, press Enter. Then run this single command to install Claude Code:</p>
+                        </div>
                         <div class="code-block">npm install -g @anthropic-ai/claude-code</div>
                         <p>Once installed, log in with your Anthropic account:</p>
                         <div class="code-block">claude</div>
@@ -1849,7 +1937,12 @@
                         <span class="step-tag tag-setup">One-time Setup</span>
                         <h3>Get the PM Agent onto Your Machine</h3>
                         <p class="step-sub">Create a branch for your team and download the agent.</p>
-                        <p>In Terminal, navigate to where you want to keep the project (e.g. your Desktop), then run:</p>
+                        <div class="os-block os-mac">
+                            <p>In Terminal, navigate to where you want to keep the project (e.g. your Desktop), then run:</p>
+                        </div>
+                        <div class="os-block os-windows">
+                            <p>In Windows Terminal / Command Prompt, navigate to where you want to keep the project (e.g. your Desktop), then run:</p>
+                        </div>
                         <div class="code-block"><span class="code-comment"># Clone the repo</span>
 git clone https://github.com/sabha-pandora/PND-PM-AGENT.git
 cd PND-PM-AGENT
@@ -1859,6 +1952,10 @@ git checkout -b team/CARE</div>
                         <div class="tip-box">
                             <span class="tip-icon">📌</span>
                             <p><strong>Why a branch?</strong> Each team keeps their own branch so your team's config and knowledge base don't clash with other teams. You never merge this back — it's your team's permanent workspace.</p>
+                        </div>
+                        <div class="tip-box os-block os-windows">
+                            <span class="tip-icon">💡</span>
+                            <p><strong>Don't have git?</strong> Download <a href="https://git-scm.com/download/win" style="color:var(--pandora-pink);font-weight:600;">Git for Windows</a>. During install, keep all defaults. Once installed, close and reopen your terminal, then try the commands above.</p>
                         </div>
                     </div>
                 </div>
@@ -1871,8 +1968,14 @@ git checkout -b team/CARE</div>
                         <h3>Configure Your Jira &amp; Confluence Credentials</h3>
                         <p class="step-sub">Tell the agent which project board to connect to and how to authenticate.</p>
                         <p>Copy the example config file and open it in any text editor:</p>
-                        <div class="code-block">cp .env.example .env
+                        <div class="os-block os-mac">
+                            <div class="code-block">cp .env.example .env
 open .env</div>
+                        </div>
+                        <div class="os-block os-windows">
+                            <div class="code-block">copy .env.example .env
+notepad .env</div>
+                        </div>
                         <p>Fill in these values — replace everything inside the quotes:</p>
                         <div class="code-block env-table">
                             <table style="border-collapse:collapse;width:100%;font-family:inherit;font-size:inherit;">
@@ -1920,7 +2023,12 @@ open .env</div>
                         <span class="step-tag tag-run">First Run</span>
                         <h3>Launch the Agent</h3>
                         <p class="step-sub">Start Claude Code inside the project folder.</p>
-                        <p>In Terminal, make sure you're inside the <code style="font-size:13px;">PND-PM-AGENT</code> folder, then run:</p>
+                        <div class="os-block os-mac">
+                            <p>In Terminal, make sure you're inside the <code style="font-size:13px;">PND-PM-AGENT</code> folder, then run:</p>
+                        </div>
+                        <div class="os-block os-windows">
+                            <p>In Windows Terminal / Command Prompt, make sure you're inside the <code style="font-size:13px;">PND-PM-AGENT</code> folder (type <code style="font-size:13px;">cd PND-PM-AGENT</code> if needed), then run:</p>
+                        </div>
                         <div class="code-block">claude</div>
                         <p>Claude Code will open an interactive session. You'll see a prompt where you can type slash commands or ask questions in plain English. That's it — you're in.</p>
                         <div class="tip-box">
@@ -2013,7 +2121,12 @@ open .env</div>
                         <span class="step-tag tag-daily">Good to Know</span>
                         <h3>Switching Between Teams</h3>
                         <p class="step-sub">If you support more than one Pandora team, switching takes seconds.</p>
-                        <p>Open your <code style="font-size:13px;">.env</code> file and change the three team lines:</p>
+                        <div class="os-block os-mac">
+                            <p>Open your <code style="font-size:13px;">.env</code> file (<code style="font-size:13px;">open .env</code> in Terminal) and change the three team lines:</p>
+                        </div>
+                        <div class="os-block os-windows">
+                            <p>Open your <code style="font-size:13px;">.env</code> file (<code style="font-size:13px;">notepad .env</code> in Command Prompt) and change the three team lines:</p>
+                        </div>
                         <div class="code-block">
                             <table style="border-collapse:collapse;font-family:inherit;font-size:inherit;">
                                 <tr><td style="padding:3px 16px 3px 0;white-space:nowrap;"><span class="code-key">JIRA_PROJECT_KEY</span>=<span class="code-value">"LOYALTY"</span></td><td style="padding:3px 0;color:var(--text-muted);font-style:italic;">← your team's Jira key</td></tr>
@@ -2026,6 +2139,52 @@ open .env</div>
                             <span class="tip-icon">📁</span>
                             <p><strong>Each team's data is kept separate.</strong> PVA data lives in <code style="font-size:12px;">docs/pva/</code>, CARE in <code style="font-size:12px;">docs/care/</code>, LOYALTY in <code style="font-size:12px;">docs/loyalty/</code> — switching teams never overwrites another team's knowledge base.</p>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Step 10 -->
+                <div class="step fade-in">
+                    <div class="step-num"><div class="step-num-circle">10</div></div>
+                    <div class="step-body">
+                        <span class="step-tag tag-daily">Pro Tip</span>
+                        <h3>Scan Your Dev &amp; QE Repos Before Writing Stories</h3>
+                        <p class="step-sub">See what the team has already built so you don't write stories for finished work.</p>
+                        <p>If your team's code lives on your machine, point the agent at the folder:</p>
+                        <div class="os-block os-mac">
+                            <div class="code-block">/scan-repo /Users/yourname/repos/pva-chatbot</div>
+                        </div>
+                        <div class="os-block os-windows">
+                            <div class="code-block">/scan-repo C:\repos\pva-chatbot</div>
+                        </div>
+                        <p>If your team uses Azure DevOps, add your credentials to <code style="font-size:13px;">.env</code> first:</p>
+                        <div class="code-block">
+                            <table style="border-collapse:collapse;font-family:inherit;font-size:inherit;">
+                                <tr><td style="padding:3px 16px 3px 0;white-space:nowrap;"><span class="code-key">AZURE_ORG</span>=<span class="code-value">"pandoradigital"</span></td><td style="padding:3px 0;color:var(--text-muted);font-style:italic;">← your Azure DevOps org name</td></tr>
+                                <tr><td style="padding:3px 16px 3px 0;white-space:nowrap;"><span class="code-key">AZURE_PROJECT</span>=<span class="code-value">"PVA"</span></td><td style="padding:3px 0;color:var(--text-muted);font-style:italic;">← your Azure project</td></tr>
+                                <tr><td style="padding:3px 16px 3px 0;white-space:nowrap;"><span class="code-key">AZURE_PAT</span>=<span class="code-value">"paste-your-pat-here"</span></td><td style="padding:3px 0;color:var(--text-muted);font-style:italic;">← Personal Access Token</td></tr>
+                                <tr><td style="padding:3px 16px 3px 0;white-space:nowrap;"><span class="code-key">DEV_REPO_NAME</span>=<span class="code-value">"sfcc-chatbot"</span></td><td style="padding:3px 0;color:var(--text-muted);font-style:italic;">← your DEV repo name</td></tr>
+                                <tr><td style="padding:3px 16px 3px 0;white-space:nowrap;"><span class="code-key">QE_REPO_NAME</span>=<span class="code-value">"sfcc-qe"</span></td><td style="padding:3px 0;color:var(--text-muted);font-style:italic;">← your QE repo name</td></tr>
+                            </table>
+                        </div>
+                        <p>Then run:</p>
+                        <div class="code-block">/scan-repo pandoradigital/PVA/sfcc-chatbot --days=30</div>
+                        <p>Or scan both DEV and QE repos together, and link the summary to a Jira epic:</p>
+                        <div class="code-block">/scan-repo dev:/repos/sfcc-dev,qe:/repos/sfcc-qe --epic=PVA-100</div>
+                        <p>The agent will produce a plain-English summary grouped by feature area — chatbot flows, payment, auth, etc. — and save it to your team's docs folder. Next time you run <span class="inline-cmd">/write-story</span>, the agent automatically reads this summary for context.</p>
+                        <div class="tip-box">
+                            <span class="tip-icon">🔑</span>
+                            <p><strong>Where do I get an Azure PAT?</strong> Go to <strong>dev.azure.com</strong> → click your avatar → <strong>Personal Access Tokens</strong> → <strong>New Token</strong>. Set scope to <em>Code (Read)</em> and <em>Pull Request Threads (Read)</em>. It only needs read access — no write permissions required.</p>
+                        </div>
+                        <div class="tip-box">
+                            <span class="tip-icon">📅</span>
+                            <p><strong>When should I re-run it?</strong> Run at the start of each sprint or before a planning session. Use <code style="font-size:12px;">--days=14</code> for a quick "what changed this sprint" view, or <code style="font-size:12px;">--days=90</code> for a full quarterly retrospective.</p>
+                        </div>
+                        <ul class="checklist">
+                            <li>Run before sprint planning to see what's recently been shipped</li>
+                            <li>Use to validate stories — if it's already in git, mark it done</li>
+                            <li>Use the QE repo scan to check which areas have automated test coverage</li>
+                            <li>Combine with <span class="inline-cmd">/write-story</span> for context-aware story creation</li>
+                        </ul>
                     </div>
                 </div>
 
@@ -2053,6 +2212,7 @@ open .env</div>
                         <tr><td>Generate stories from a Figma design</td><td><span class="inline-cmd">/review-figma [Figma URL]</span></td></tr>
                         <tr><td>Refresh the board snapshot</td><td><span class="inline-cmd">/sync-kb</span></td></tr>
                         <tr><td>Generate traceability matrix</td><td><span class="inline-cmd">/generate-traceability</span></td></tr>
+                        <tr><td>See what dev/QE has already built</td><td><span class="inline-cmd">/scan-repo [path or Azure repo]</span></td></tr>
                     </tbody>
                 </table>
             </div>
@@ -2068,6 +2228,19 @@ open .env</div>
     </footer>
 
     <script>
+        // OS Toggle
+        function switchOS(os) {
+            const isWin = os === 'windows';
+            document.querySelectorAll('.os-mac').forEach(el => el.classList.toggle('visible', !isWin));
+            document.querySelectorAll('.os-windows').forEach(el => el.classList.toggle('visible', isWin));
+            document.getElementById('btn-mac').classList.toggle('active', !isWin);
+            document.getElementById('btn-win').classList.toggle('active', isWin);
+            localStorage.setItem('pnd-os', os);
+        }
+        // Load saved OS preference or default to mac
+        const savedOS = localStorage.getItem('pnd-os') || 'mac';
+        switchOS(savedOS);
+
         // Theme Toggle
         function toggleTheme() {
             const html = document.documentElement;
