@@ -1289,7 +1289,7 @@
                     <div class="stat-label">Teams Supported</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value">6</div>
+                    <div class="stat-value">7</div>
                     <div class="stat-label">Quality Frameworks</div>
                 </div>
                 <div class="stat-item">
@@ -1331,6 +1331,12 @@
                     <h3>Confluence Documentation</h3>
                     <p>Creates epic summaries, feature specs, sprint overviews, and release notes directly in Confluence with structured templates.</p>
                     <span class="feature-tag">Confluence API</span>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">&#127912;</div>
+                    <h3>Rich Formatting (ADF + Storage)</h3>
+                    <p>Every Jira write uses Atlassian Document Format &mdash; proper headings, bullet lists, taskList checkboxes for DoR/DoD, and Gherkin code blocks with syntax highlighting. Confluence pages use storage format with native macros, panels, and tables. No more wall-of-text comments.</p>
+                    <span class="feature-tag">ADF / Storage Format</span>
                 </div>
                 <div class="feature-card fade-in">
                     <div class="feature-icon">&#128269;</div>
@@ -1558,6 +1564,7 @@
                             <div class="arch-block-title">&#128196; docs/shared/</div>
                             <div class="arch-block-items">
                                 <span>user-stories-best-practices.docx</span>
+                                <span>adf-templates.md &mdash; ADF + storage skeletons</span>
                                 <span>Pandora quality standards</span>
                                 <span>Shared across all teams</span>
                             </div>
@@ -1642,30 +1649,30 @@
                 <!-- Layer 4: External Integrations -->
                 <div class="arch-zone arch-zone-integrations">
                     <div class="arch-zone-label">&#127760; Layer 4 — External Integrations</div>
-                    <div class="arch-zone-desc">All external calls use Basic Auth (email + API token). Read-before-write and verify-after-write on every mutation.</div>
+                    <div class="arch-zone-desc">All external calls use Basic Auth (email + API token). Read-before-write and verify-after-write on every mutation. Jira writes use ADF; Confluence writes use storage format &mdash; skeletons live in <code>docs/shared/adf-templates.md</code>.</div>
                     <div class="arch-zone-row">
                         <div class="arch-integration-card">
                             <div class="arch-int-icon">&#128272;</div>
                             <div class="arch-int-name">Jira REST API v3</div>
-                            <div class="arch-int-detail">pandoradigital.atlassian.net</div>
+                            <div class="arch-int-detail">pandoradigital.atlassian.net &middot; ADF payloads</div>
                             <div class="arch-block-items" style="text-align:left;margin-top:10px;">
                                 <span>GET /issue/{key} — fetch story</span>
                                 <span>POST /search/jql — duplicate check</span>
-                                <span>POST /issue — create story</span>
-                                <span>PUT /issue/{key} — update story</span>
-                                <span>POST /issue/{key}/comment — reply</span>
+                                <span>POST /issue — create story (ADF body)</span>
+                                <span>PUT /issue/{key} — update story (ADF body)</span>
+                                <span>POST /issue/{key}/comment — ADF reply</span>
                                 <span>POST /issue/{key}/transitions — move status</span>
                             </div>
                         </div>
                         <div class="arch-integration-card">
                             <div class="arch-int-icon">&#128203;</div>
                             <div class="arch-int-name">Confluence REST API v2</div>
-                            <div class="arch-int-detail">pandoradigital.atlassian.net/wiki</div>
+                            <div class="arch-int-detail">pandoradigital.atlassian.net/wiki &middot; storage format</div>
                             <div class="arch-block-items" style="text-align:left;margin-top:10px;">
                                 <span>GET /content/search?cql — CQL search</span>
                                 <span>GET /pages/{id} — read page</span>
-                                <span>POST /pages — create page</span>
-                                <span>PUT /pages/{id} — update page</span>
+                                <span>POST /pages — create page (XHTML storage)</span>
+                                <span>PUT /pages/{id} — update page (XHTML storage)</span>
                                 <span>POST /pages/{id}/footer-comments</span>
                             </div>
                         </div>
@@ -1798,6 +1805,17 @@
                         <li>No open Critical/High defects</li>
                         <li>Code peer reviewed &amp; merged</li>
                         <li>Docs and release notes updated</li>
+                    </ul>
+                </div>
+                <div class="practice-card fade-in">
+                    <h4>&#9745; ADF Authoring Standard</h4>
+                    <ul class="practice-list">
+                        <li>Jira: every description, comment &amp; AC field is a valid ADF doc</li>
+                        <li>Confluence: pages use storage format (XHTML + macros)</li>
+                        <li>DoR / DoD render as native <code>taskList</code> checkboxes</li>
+                        <li>Gherkin ACs in a <code>codeBlock</code> with syntax highlighting</li>
+                        <li>No raw Markdown smuggled into <code>text</code> nodes</li>
+                        <li>Templates in <code>docs/shared/adf-templates.md</code></li>
                     </ul>
                 </div>
             </div>
